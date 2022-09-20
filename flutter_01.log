@@ -1,0 +1,74 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run --machine --start-paused -d chrome --devtools-server-address http://127.0.0.1:9100/ --target lib\main.dart
+
+## exception
+
+StateError: Bad state: No context with the running Dart application.
+
+```
+#0      RemoteDebuggerExecutionContext.id (package:dwds/src/debugging/execution_context.dart:55:7)
+<asynchronous suspension>
+#1      AppInspector._getExtensionRpcs (package:dwds/src/debugging/inspector.dart:538:20)
+<asynchronous suspension>
+#2      AppInspector._initialize (package:dwds/src/debugging/inspector.dart:97:34)
+<asynchronous suspension>
+#3      AppInspector.initialize (package:dwds/src/debugging/inspector.dart:160:5)
+<asynchronous suspension>
+#4      ChromeProxyService.createIsolate (package:dwds/src/services/chrome_proxy_service.dart:216:18)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.0.6-0.0.pre.1, on Microsoft Windows [Version 10.0.19044.1288], locale en-US)
+    • Flutter version 3.0.6-0.0.pre.1 at C:\Users\chick61\src\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 77a23e2212 (6 days ago), 2022-07-31 18:36:18 +0300
+    • Engine revision e85ea0e79c
+    • Dart version 2.17.6
+    • DevTools version 2.12.2
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 32.1.0-rc1)
+    • Android SDK at C:\Users\chick61\AppData\Local\Android\sdk
+    • Platform android-32, build-tools 32.1.0-rc1
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 11.0.12+7-b1504.28-7817840)
+    • All Android licenses accepted.
+
+[✓] Chrome - develop for the web
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[✓] Visual Studio - develop for Windows (Visual Studio Community 2022 17.2.4)
+    • Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Community
+    • Visual Studio Community 2022 version 17.2.32602.215
+    • Windows 10 SDK version 10.0.19041.0
+
+[✓] Android Studio (version 2021.2)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 11.0.12+7-b1504.28-7817840)
+
+[✓] VS Code (version 1.70.0)
+    • VS Code at C:\Users\chick61\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension version 3.46.0
+
+[✓] Connected device (2 available)
+    • Chrome (web) • chrome • web-javascript • Google Chrome 104.0.5112.80
+    • Edge (web)   • edge   • web-javascript • Microsoft Edge 103.0.1264.77
+
+[!] HTTP Host Availability
+    ✗ HTTP host "https://cocoapods.org/" is not reachable. Reason: An error occurred while checking the HTTP host: Failed host lookup: 'cocoapods.org'
+    ✗ HTTP host "https://maven.google.com/" is not reachable. Reason: An error occurred while checking the HTTP host: Failed host lookup: 'maven.google.com'
+    ✗ HTTP host "https://pub.dev/" is not reachable. Reason: An error occurred while checking the HTTP host: Failed host lookup: 'pub.dev'
+    ✗ HTTP host "https://cloud.google.com/" is not reachable. Reason: An error occurred while checking the HTTP host: Failed host lookup: 'cloud.google.com'
+
+! Doctor found issues in 1 category.
+```

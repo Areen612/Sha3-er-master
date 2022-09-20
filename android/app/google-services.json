@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "626835432950",
+    "project_id": "shager-db707",
+    "storage_bucket": "shager-db707.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626835432950:android:1cd83c5210dc15db7f53d7",
+        "android_client_info": {
+          "package_name": "com.psut.shager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626835432950-8fja5spoom5javolt250m8mce479hp3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQZMV3J_EHXkgYicJ5ndNAzVIQMmyauE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626835432950-8fja5spoom5javolt250m8mce479hp3k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,101 @@
+class KeyLang {
+  // * tour
+  static const String getStarted = 'getStarted';
+  static const String tourHeaderOne = 'tourHeaderOne';
+  static const String tourSubtitleOne = 'tourSubtitleOne';
+  static const String tourHeaderTwo = 'tourHeaderTwo';
+  static const String tourHeaderThree = 'tourHeaderThree';
+  // * app
+  static const String user = 'user';
+  static const String company = 'company';
+  static const String appName = 'appName';
+  static const String welcomeMessage = 'welcomeMessage';
+  static const String uploadCv = 'uploadCv';
+  static const String userName = 'userName';
+  static const String userProfile = 'userProfile';
+  static const String termsAndConditions = 'termsAndConditions';
+  static const String darkMode = 'darkMode';
+  static const String lightMode = 'lightMode';
+  static const String signin = 'signin';
+  static const String signout = 'signout';
+  static const String forgetpassword = 'forgetpassword';
+  static const String createaccount = 'createaccount';
+  static const String submit = 'submit';
+  static const String cont = 'cont';
+  static const String addreview = 'addreview';
+  static const String companyname = 'companyname';
+  static const String companyaddress = 'companyaddress';
+  static const String companyemail = 'companyemail';
+  static const String companynumber = 'companyphonenumber';
+  static const String jobdescription = 'jobdescription';
+  static const String sendrequest = 'sendrequest';
+  static const String rating = 'rating';
+  static const String paid = 'paid';
+  static const String unpaid = 'unpaid';
+  static const String job = 'job';
+  static const String jobs = 'jobs';
+  static const String home = 'home';
+  static const String training = 'training';
+  static const String templet = 'templet';
+  static const String skills = 'skills';
+  static const String education = 'education';
+  static const String address = 'address';
+  static const String experience = 'experience';
+  static const String fname = 'fname';
+  static const String lname = 'lname';
+  static const String birthday = 'birthday';
+  static const String mobilenumber = 'mobilenumber';
+  static const String objective = 'objective';
+  static const String nameApp = 'nameApp';
+  static const String email = 'email';
+  static const String pass = 'pass';
+  static const String confirmPass = 'confirmPass';
+  static const String forgotPass = 'forgotPass';
+  static const String login = 'login';
+  static const String register = 'register';
+  static const String order = 'order';
+  static const String chooseAll = 'chooseAll';
+  static const String notAccount = 'notAccount';
+  static const String haveAccount = 'haveAccount';
+  static const String hintResetPass = 'hintResetPass';
+  static const String resetPassword = 'resetPassword';
+  static const String fillCv = 'fillCv';
+  // * Error
+  static const String enterValue = 'enterValue';
+  static const String errorEmail = 'errorEmail';
+  static const String errorPass = 'errorPass';
+  static const String errorConfirmPass = 'errorConfirmPass';
+  static const String errorInitFirebase = 'errorInitFirebase';
+  static const String errorPhoneNumber = 'errorPhoneNumber';
+  static const String errorNoData = 'errorNoData';
+  static const String noInternet = 'noInternet';
+
+  // * Language
+  static const String selectLanguage = 'selectLanguage';
+  static const String english = 'english';
+  static const String arabic = 'arabic';
+  static const String cancel = 'cancel';
+  static const String logout = 'logout';
+  static const String themes = 'themes';
+  static const String language = 'language';
+  static const String light = 'light';
+  static const String dark = 'dark';
+  static const String ok = 'ok';
+  static const String messageLogout = 'messageLogout';
+  static const String edit = 'edit';
+  static const String delete = 'delete';
+  static const String chooseCoffee = 'chooseCoffee';
+  static const String titleDeleteOrder = 'titleDeleteOrder';
+  static const String descDeleteOrder = 'descDeleteOrder';
+
+  // * Company
+  static const String specialty = 'specialty';
+  static const String country = 'country';
+  static const String city = 'city';
+  static const String enterpriseOwner = 'enterpriseOwner';
+  static const String commercialAddress = 'commercialAddress';
+  static const String status = 'status';
+  static const String nationalInvestorNumber = 'nationalInvestorNumber';
+  static const String commercialNumber = 'commercialNumber';
+  static const String commercialName = 'commercialName';
+}

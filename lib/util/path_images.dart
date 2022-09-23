@@ -4,6 +4,7 @@
 class PathImages {
   //static const String appLogo = 'assets/images/appLogo.svg';
   static const String appLogo = 'assets/images/appLogo.png';
+  static const String blueLogo = 'assets/images/blue_logo.png';
   static const String unitedArabEmiratesFlag =
       'assets/images/unitedArabEmiratesFlag.png';
   static const String unitedStatesFlag = 'assets/images/unitedStatesFlag.png';

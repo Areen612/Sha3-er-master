@@ -3,8 +3,8 @@ import 'package:shagher/service/theme/app_theme.dart';
 import '../../../themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
 
+// !!!!
 class SimpleBtn extends StatelessWidget {
   const SimpleBtn({
     Key? key,
@@ -32,7 +32,7 @@ class SimpleBtn extends StatelessWidget {
         height: _height.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: AppColors.black,
+          color: AppColors.primary,
           // gradient: LinearGradient(
           //     colors: AppColors.primary,
           //     begin: _ltr ? Alignment.centerLeft : Alignment.centerRight,
@@ -40,7 +40,7 @@ class SimpleBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.r),
         ),
         child: Text(
-          _btnTitle.tr(),
+          _btnTitle, //.tr(),
           style: AppTheme.h5(context).copyWith(color: AppColors.bgWhite),
         ),
       ),

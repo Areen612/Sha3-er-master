@@ -1,7 +1,7 @@
 import 'package:shagher/util/api_key.dart';
 
 class ModelUserAuth {
-  int? id;
+  String? id;
   String? firstName;
   String? lastName;
   String? email;
@@ -21,19 +21,19 @@ class ModelUserAuth {
 
   ModelUserAuth({
     this.id,
-    this.firstName = '',
-    this.lastName = '',
-    this.email = '',
-    this.password = '',
-    this.specialty = '',
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.specialty,
     this.birthDate,
-    this.experience = '',
-    this.skills = '',
-    this.phoneNumber = '',
-    this.country = '',
-    this.city = '',
-    this.imageUrl = '',
-    this.cvUrl = '',
+    this.experience,
+    this.skills,
+    this.phoneNumber,
+    this.country,
+    this.city,
+    this.imageUrl,
+    this.cvUrl,
   });
   setFname(String? firstName) {
     this.firstName = firstName ?? '';
@@ -43,7 +43,6 @@ class ModelUserAuth {
   setEmail(String? email) => this.email = email ?? '';
   setPass(String? password) => this.password = password ?? '';
   setbirthDate(DateTime? birthDate) => this.birthDate = birthDate;
-
   setExperience(String? experience) => this.experience = experience ?? '';
   setSkills(String? skills) => this.skills = skills ?? '';
   setPhoneNumber(String? phoneNumber) => this.phoneNumber = phoneNumber ?? '';
@@ -62,36 +61,35 @@ class ModelUserAuth {
 
   String getFullName() => firstName! + ' ' + lastName!;
 
-  ModelUserAuth.fromJson(Map<String, dynamic> json) {
-    id = json[KeyApi.id];
-    firstName = json[KeyApi.firstName];
-    lastName = json[KeyApi.lastName];
-    password = json[KeyApi.password];
-    email = json[KeyApi.email];
-    specialty = json[KeyApi.specialty];
-    birthDate = json[KeyApi.birthDate];
-    experience = json[KeyApi.experience];
-    skills = json[KeyApi.skills];
-    phoneNumber = json[KeyApi.phoneNumber];
-    country = json[KeyApi.country];
-    city = json[KeyApi.city];
-    imageUrl = json[KeyApi.imageUrl];
-    cvUrl = json[KeyApi.cvUrl];
+  Map<String, dynamic>? toMap() {
+    return {
+      KeyApi.id: id,
+      KeyApi.firstName: firstName,
+      KeyApi.lastName: lastName,
+      KeyApi.password: password,
+      KeyApi.email: email,
+      KeyApi.phoneNumber: phoneNumber,
+      KeyApi.country: country,
+      KeyApi.city: city,
+      KeyApi.skills: skills,
+      KeyApi.experience: experience,
+      KeyApi.imageUrl: imageUrl,
+      KeyApi.cvUrl: cvUrl,
+    };
   }
 
-  Map<String, dynamic>? toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data[KeyApi.firstName] = firstName;
-    data[KeyApi.lastName] = lastName;
-    data[KeyApi.password] = password;
-    data[KeyApi.email] = email;
-    data[KeyApi.phoneNumber] = phoneNumber;
-    data[KeyApi.country] = country;
-    data[KeyApi.city] = city;
-    data[KeyApi.skills] = skills;
-    data[KeyApi.experience] = experience;
-    data[KeyApi.imageUrl] = imageUrl;
-    data[KeyApi.cvUrl] = cvUrl;
-    return null;
+  ModelUserAuth.fromMap(Map<String, dynamic> data) {
+    id = data[KeyApi.id];
+    firstName = data[KeyApi.firstName];
+    lastName = data[KeyApi.lastName];
+    password = data[KeyApi.password];
+    email = data[KeyApi.email];
+    phoneNumber = data[KeyApi.phoneNumber];
+    country = data[KeyApi.country];
+    city = data[KeyApi.city];
+    skills = data[KeyApi.skills];
+    experience = data[KeyApi.experience];
+    imageUrl = data[KeyApi.imageUrl];
+    cvUrl = data[KeyApi.cvUrl];
   }
 }

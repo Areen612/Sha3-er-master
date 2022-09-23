@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shagher/packages/components/nav_bar/company_nav_bar.dart';
-import 'package:shagher/packages/pages/Posts/company/views/add_post_widget.dart';
+import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/home.dart';
 import 'package:shagher/packages/pages/settings/views/body.dart';
 import 'package:shagher/service/lang/app_lang.dart';

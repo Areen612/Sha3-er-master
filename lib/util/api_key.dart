@@ -19,8 +19,12 @@ class KeyApi {
   // * posts
   static const String title = 'title';
   static const String requirements = 'requirements';
+  static const String description = 'description';
   static const String rangeSalary = 'rangeSalary';
+  static const String rangeSalaryStart = 'rangeSalaryStart';
+  static const String rangeSalaryEnd = 'rangeSalaryEnd';
   static const String type = 'type';
+  static const String subType = 'subType';
   static const String creator = 'creator';
   // * cv
   static const String cv = 'cv';

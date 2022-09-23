@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,24 @@ class RegCompanyColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     // * Auth Provider
     final CompanyAuthService _auth = Provider.of<CompanyAuthService>(context);
+
+    _handleSubmitAction() async {
+      if (_keyForm.currentState?.validate() ?? false) {
+        _keyForm.currentState?.save();
+        FocusScope.of(context).requestFocus(FocusNode());
+        User? _user = await _auth.registerCompany(data: _companyAuth);
+        if (_user != null) {
+          FirebaseFirestore.instance
+              .collection("users")
+              .doc(_companyAuth.id)
+              .set(_companyAuth.toMap());
+          _navHome(context);
+        } else {
+          errorToast(_auth.errorMessage);
+        }
+      }
+    }
+
     return Column(
       children: [
         const SBH(),
@@ -92,21 +111,7 @@ class RegCompanyColumn extends StatelessWidget {
           child: _auth.isLoading
               ? const AppLoading(chooseLoading: ChooseLoading.button)
               : SimpleBtn(
-                  btnTitle: KeyLang.register,
-                  onTap: () async {
-                    if (_keyForm.currentState?.validate() ?? false) {
-                      _keyForm.currentState?.save();
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      User? _user =
-                          await _auth.registerCompany(data: _companyAuth);
-                      if (_user != null) {
-                        _navHome(context);
-                      } else {
-                        errorToast(_auth.errorMessage);
-                      }
-                    }
-                  },
-                ),
+                  btnTitle: KeyLang.register, onTap: _handleSubmitAction),
         ),
         const SBH(h: 20),
         // *  have Account

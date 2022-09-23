@@ -42,6 +42,7 @@ class LoginWidget extends StatelessWidget {
             children: [
               // * header Auth
               const HeaderAuth(),
+              const SBH(h: 30),
               // * Email
               FieldEmail(valueEmail: _userAuth.setEmail),
               const SBH(),

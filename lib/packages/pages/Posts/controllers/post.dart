@@ -4,10 +4,10 @@ import 'package:shagher/packages/pages/Posts/models/post.dart';
 class ControllerPosts {
   static final List<ModelPost> _dataPosts = [
     ModelPost(
-        id: 0,
+        id: '0',
         title: 'Company',
         requirements: 'req',
-        rangeSalary: '500-600',
+        // rangeSalary: '500-600',
         type: 'paid')
   ];
   // * get List

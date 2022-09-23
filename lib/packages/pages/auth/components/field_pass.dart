@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shagher/packages/components/text_field_form/custom_filed.dart';
 import 'package:shagher/service/validotors/app_validators.dart';
@@ -31,6 +30,7 @@ class FieldPass extends StatefulWidget {
   final String? _helperText;
 }
 
+// !!!
 class _FieldPassState extends State<FieldPass> {
   // * Icon
   bool _obscureText = true;
@@ -38,9 +38,9 @@ class _FieldPassState extends State<FieldPass> {
   @override
   Widget build(BuildContext context) {
     return CustomField(
-      hint: widget._hint?.tr(),
-      labelText: KeyLang.pass.tr(),
-      helperText: widget._helperText?.tr(),
+      hint: widget._hint, //?.tr(),
+      labelText: KeyLang.pass, //.tr(),
+      helperText: widget._helperText, //?.tr(),
       isObscureText: _obscureText,
       pIcon: PathIcons.passIcon,
       sIcon: Padding(

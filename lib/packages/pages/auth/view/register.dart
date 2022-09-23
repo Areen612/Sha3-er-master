@@ -1,3 +1,4 @@
+import 'package:get/route_manager.dart';
 import 'package:shagher/packages/components/button/simple_btn.dart';
 import 'package:shagher/packages/pages/auth/components/company_reg.dart';
 import 'package:shagher/packages/pages/auth/components/field_fname.dart';
@@ -25,12 +26,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterWidget extends StatefulWidget {
   static const String id = 'RegisterWidget';
-  // * key Form
-  // *  model save data
-  static final ModelUserAuth _userAuth = ModelUserAuth();
-  // * save pass
-
-  static bool rep = false;
   const RegisterWidget({Key? key}) : super(key: key);
 
   @override
@@ -40,18 +35,16 @@ class RegisterWidget extends StatefulWidget {
 class PageRegisterState extends State<RegisterWidget> {
   static String? pass;
   static int? flag = 0;
-  static ModelUserAuth userAuth = ModelUserAuth();
+  static final ModelUserAuth _userAuth = ModelUserAuth();
 
   @override
   Widget build(BuildContext context) {
     // * Auth Provider
-    // final AuthService _auth = Provider.of<AuthService>(context);
-    // * Auth Provider
     final UserAuthService _auth = Provider.of<UserAuthService>(context);
     final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
+    int _selectedIndex = 0;
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Container(
+      body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.w),
         child: Form(
           key: _keyForm,
@@ -59,27 +52,27 @@ class PageRegisterState extends State<RegisterWidget> {
             children: [
               // * Header Auth
               const HeaderAuth(),
-
               ToggleSwitchCompany(onSelected: (index) {
                 setState(() {
-                  flag = index;
+                  _selectedIndex = index;
+                  // flag = index;
                 });
               }),
 
               Visibility(
-                replacement: const RegCompanyColumn(),
+                // replacement: const RegCompanyColumn(),
                 child: Column(
                   children: [
                     const SBH(),
 
                     // * First name
-                    FieldFname(valueFname: PageRegisterState.userAuth.setFname),
+                    FieldFname(valueFname: _userAuth.setFname),
                     const SBH(),
                     // * Last name
-                    FieldLname(valueLname: PageRegisterState.userAuth.setLname),
+                    FieldLname(valueLname: _userAuth.setLname),
                     const SBH(),
                     // * Email
-                    FieldEmail(valueEmail: PageRegisterState.userAuth.setEmail),
+                    FieldEmail(valueEmail: _userAuth.setEmail),
                     const SBH(),
                     // * Password
                     // TODO: tr()
@@ -92,9 +85,18 @@ class PageRegisterState extends State<RegisterWidget> {
                     FieldPass(
                       onValidators: (value) =>
                           AppValidators.isEqualPass(value, pass ?? ''),
-                      valuePass: PageRegisterState.userAuth.setPass,
+                      valuePass: _userAuth.setPass,
                     ),
                     const SBH(h: 20),
+                    // index stack
+                    IndexedStack(
+                      index: _selectedIndex,
+                      children: [
+                        const RegisterWidget(),
+                        const RegCompanyColumn(),
+                        CvForm(userAuth: _userAuth),
+                      ],
+                    ),
                     // * button
                     Center(
                       child: _auth.isLoading
@@ -103,12 +105,21 @@ class PageRegisterState extends State<RegisterWidget> {
                           : SimpleBtn(
                               btnTitle: KeyLang.cont,
                               onTap: () {
-                                // if (_keyForm.currentState?.validate() ??
-                                //     false) {
-                                //   _keyForm.currentState?.save();
-                                Navigator.pushNamed(context, CvForm.id);
-                                // }
-                              },
+                                Get.to(CvForm(userAuth: _userAuth));
+                                _selectedIndex = 2;
+                                if (_keyForm.currentState?.validate() ??
+                                    false) {
+                                  _keyForm.currentState?.save();
+                                  Get.to(CvForm(userAuth: _userAuth));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             CvForm(userAuth: userAuth)));
+
+                                  //Navigator.pushNamed(context, CvForm.id);
+                                }
+                              }
                               // onTap: () async {
                               //   if (_keyForm.currentState?.validate() ??
                               //       false) {
@@ -125,7 +136,7 @@ class PageRegisterState extends State<RegisterWidget> {
                               //     }
                               //   }
                               // },
-                            ),
+                              ),
                     ),
                     const SBH(h: 20),
                     // *  have Account
@@ -136,13 +147,13 @@ class PageRegisterState extends State<RegisterWidget> {
                     ),
                   ],
                 ),
-                visible: flag == 0 ? true : false,
+                //visible: flag == 0 ? true : false,
                 //_replace(flag),
               ),
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 
@@ -158,20 +169,14 @@ class PageRegisterState extends State<RegisterWidget> {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // class RegisterWidget extends StatefulWidget {
 //   static const String id = 'RegisterWidget';
+//   // * key Form
+//   // *  model save data
+//   static final ModelUserAuth _userAuth = ModelUserAuth();
+//   // * save pass
+
+//   static bool rep = false;
 //   const RegisterWidget({Key? key}) : super(key: key);
 
 //   @override
@@ -181,14 +186,15 @@ class PageRegisterState extends State<RegisterWidget> {
 // class PageRegisterState extends State<RegisterWidget> {
 //   static String? pass;
 //   static int? flag = 0;
-//   static final ModelUserAuth _userAuth = ModelUserAuth();
+//   static ModelUserAuth userAuth = ModelUserAuth();
 
 //   @override
 //   Widget build(BuildContext context) {
 //     // * Auth Provider
+//     // final AuthService _auth = Provider.of<AuthService>(context);
+//     // * Auth Provider
 //     final UserAuthService _auth = Provider.of<UserAuthService>(context);
 //     final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
-//     int _selectedIndex = 0;
 //     return Scaffold(
 //       body: SingleChildScrollView(
 //           child: Container(
@@ -199,27 +205,27 @@ class PageRegisterState extends State<RegisterWidget> {
 //             children: [
 //               // * Header Auth
 //               const HeaderAuth(),
+
 //               ToggleSwitchCompany(onSelected: (index) {
 //                 setState(() {
-//                    _selectedIndex = index;
-//                  // flag = index;
+//                   flag = index;
 //                 });
 //               }),
 
 //               Visibility(
-//                // replacement: const RegCompanyColumn(),
+//                 replacement: const RegCompanyColumn(),
 //                 child: Column(
 //                   children: [
 //                     const SBH(),
 
 //                     // * First name
-//                     FieldFname(valueFname: _userAuth.setFname),
+//                     FieldFname(valueFname: PageRegisterState.userAuth.setFname),
 //                     const SBH(),
 //                     // * Last name
-//                     FieldLname(valueLname: _userAuth.setLname),
+//                     FieldLname(valueLname: PageRegisterState.userAuth.setLname),
 //                     const SBH(),
 //                     // * Email
-//                     FieldEmail(valueEmail: _userAuth.setEmail),
+//                     FieldEmail(valueEmail: PageRegisterState.userAuth.setEmail),
 //                     const SBH(),
 //                     // * Password
 //                     // TODO: tr()
@@ -232,18 +238,9 @@ class PageRegisterState extends State<RegisterWidget> {
 //                     FieldPass(
 //                       onValidators: (value) =>
 //                           AppValidators.isEqualPass(value, pass ?? ''),
-//                       valuePass: _userAuth.setPass,
+//                       valuePass: PageRegisterState.userAuth.setPass,
 //                     ),
 //                     const SBH(h: 20),
-//                    // index stack
-//                     IndexedStack(
-//                       index: _selectedIndex,
-//                       children: [
-//                         const RegisterWidget(),
-//                         const RegCompanyColumn(),
-//                         CvForm(userAuth: _userAuth),
-//                       ],
-//                     ),
 //                     // * button
 //                     Center(
 //                       child: _auth.isLoading
@@ -252,21 +249,12 @@ class PageRegisterState extends State<RegisterWidget> {
 //                           : SimpleBtn(
 //                               btnTitle: KeyLang.cont,
 //                               onTap: () {
-//                                  Get.to(CvForm(userAuth: _userAuth));
-//                                 _selectedIndex = 2;
-//                                 if (_keyForm.currentState?.validate() ??
-//                                     false) {
-//                                   _keyForm.currentState?.save();
-//                                   Get.to(CvForm(userAuth: _userAuth));
-//                                   // Navigator.push(
-//                                   //     context,
-//                                   //     MaterialPageRoute(
-//                                   //         builder: (context) =>
-//                                   //             CvForm(userAuth: userAuth)));
-
-//                                   //Navigator.pushNamed(context, CvForm.id);
-//                                 }
-//                               }
+//                                 // if (_keyForm.currentState?.validate() ??
+//                                 //     false) {
+//                                 //   _keyForm.currentState?.save();
+//                                 Navigator.pushNamed(context, CvForm.id);
+//                                 // }
+//                               },
 //                               // onTap: () async {
 //                               //   if (_keyForm.currentState?.validate() ??
 //                               //       false) {
@@ -283,7 +271,7 @@ class PageRegisterState extends State<RegisterWidget> {
 //                               //     }
 //                               //   }
 //                               // },
-//                               ),
+//                             ),
 //                     ),
 //                     const SBH(h: 20),
 //                     // *  have Account
@@ -294,7 +282,7 @@ class PageRegisterState extends State<RegisterWidget> {
 //                     ),
 //                   ],
 //                 ),
-//                 //visible: flag == 0 ? true : false,
+//                 visible: flag == 0 ? true : false,
 //                 //_replace(flag),
 //               ),
 //             ],
@@ -314,3 +302,17 @@ class PageRegisterState extends State<RegisterWidget> {
 //   //   return RegisterWidget.rep;
 //   // }
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

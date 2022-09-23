@@ -8,19 +8,19 @@ class ElevatedBtn extends StatelessWidget {
   const ElevatedBtn({
     Key? key,
     required String title,
-    required void Function() onTap,
+    required this.onTap,
     double width = 100,
     //required String height
     /*double radius = 120*/
   })  : _title = title,
-        _onTap = onTap,
+        //_onTap = onTap,
         _width = width,
         // _height = height,
         // _radius = radius,
         super(key: key);
 
   final String _title;
-  final void Function() _onTap;
+  final VoidCallback onTap;
   final double _width;
   //final String _height;
 
@@ -29,7 +29,7 @@ class ElevatedBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: _onTap,
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
             foregroundColor: AppColors.cardClick,
             backgroundColor: AppColors.primary,

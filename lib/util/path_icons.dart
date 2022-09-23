@@ -15,58 +15,58 @@ class PathIcons {
   // static const String unitedStateFlagIcon =
   //     'assets/icons/unitedStateFlagIcon.svg';
   // Email
-  static FaIcon nameTagIcon = const FaIcon(
+  static FaIcon nameTagIcon = FaIcon(
     FontAwesomeIcons.solidUser,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
 
-  static FaIcon emailIcon = const FaIcon(
+  static FaIcon emailIcon = FaIcon(
     FontAwesomeIcons.solidEnvelope,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
 
   // password
-  static FaIcon passIcon = const FaIcon(
+  static FaIcon passIcon = FaIcon(
     FontAwesomeIcons.lock,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
 
-  static FaIcon eyeIcon = const FaIcon(
+  static FaIcon eyeIcon = FaIcon(
     FontAwesomeIcons.eye,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
 
-  static FaIcon eyeSlashIcon = const FaIcon(
+  static FaIcon eyeSlashIcon = FaIcon(
     FontAwesomeIcons.eyeSlash,
-    color: AppColors.black,
+    color: AppColors.secondary,
   );
-  static FaIcon company = const FaIcon(
+  static FaIcon company = FaIcon(
     FontAwesomeIcons.briefcase,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon country = const FaIcon(
+  static FaIcon country = FaIcon(
     FontAwesomeIcons.globe,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon calender = const FaIcon(
+  static FaIcon calender = FaIcon(
     FontAwesomeIcons.calendar,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon certifcate = const FaIcon(
+  static FaIcon certifcate = FaIcon(
     FontAwesomeIcons.file,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon graduate = const FaIcon(
+  static FaIcon graduate = FaIcon(
     FontAwesomeIcons.graduationCap,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon file = const FaIcon(
+  static FaIcon file = FaIcon(
     FontAwesomeIcons.fileAlt,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
-  static FaIcon phone = const FaIcon(
+  static FaIcon phone = FaIcon(
     FontAwesomeIcons.phone,
-    color: AppColors.black,
+    color: AppColors.primary,
   );
   static const String language = 'assets/icons/language.svg';
   static const String theme = 'assets/icons/paint.svg';

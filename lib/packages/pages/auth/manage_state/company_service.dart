@@ -28,7 +28,7 @@ class CompanyAuthService extends ChangeNotifier {
       setLoading = true;
       UserCredential _authResult =
           await _firebaseAuth.createUserWithEmailAndPassword(
-              email: data.email, password: data.password);
+              email: data.email!, password: data.password!);
       late User _company;
       if (_authResult.user?.uid.isNotEmpty ?? false) {
         _company = _authResult.user!;
@@ -56,8 +56,8 @@ class CompanyAuthService extends ChangeNotifier {
       setLoading = true;
       UserCredential _authResult =
           await _firebaseAuth.signInWithEmailAndPassword(
-        email: data.email,
-        password: data.password,
+        email: data.email!,
+        password: data.password!,
       );
 
       late User _company;
@@ -83,7 +83,7 @@ class CompanyAuthService extends ChangeNotifier {
   Future<bool> resetPassword({required ModelCompanyAuth data}) async {
     try {
       setLoading = false;
-      await _firebaseAuth.sendPasswordResetEmail(email: data.email);
+      await _firebaseAuth.sendPasswordResetEmail(email: data.email!);
       setLoading = false;
       return true;
     } on SocketException {

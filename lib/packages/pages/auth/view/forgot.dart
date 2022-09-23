@@ -42,7 +42,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                 // * header Auth
                 const HeaderAuth(),
                 // * hint Reset pass
-
+                const SBH(h: 30),
                 Text(
                   KeyLang.hintResetPass.tr(),
                   textAlign: TextAlign.start,

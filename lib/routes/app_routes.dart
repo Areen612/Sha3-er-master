@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:shagher/packages/pages/Posts/company/views/add_post_widget.dart';
+import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/landscape.dart';
 import 'package:shagher/packages/pages/Posts/traing/views/body.dart';
 import 'package:shagher/packages/pages/auth/view/cv.dart';

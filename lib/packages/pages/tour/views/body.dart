@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shagher/language/generated/key_lang.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
-import 'package:shagher/packages/pages/home/views/body.dart';
+import 'package:shagher/packages/pages/auth/view/wrapper.dart';
 import 'package:shagher/packages/pages/tour/componets/tour_card.dart';
 import 'package:shagher/themes/app_colors.dart';
 import 'package:shagher/util/path_images.dart';
@@ -72,7 +72,7 @@ class _TourWidgetState extends State<TourWidget> {
             ElevatedBtn(
               title: KeyLang.getStarted.tr(),
               onTap: () {
-                Navigator.pushReplacementNamed(context, UserLandScape.id);
+                Navigator.pushReplacementNamed(context, Wrapper.id);
               },
               width: 300,
             ),

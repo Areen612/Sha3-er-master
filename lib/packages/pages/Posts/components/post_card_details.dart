@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/packages/components/space/size_box_width.dart';
+import 'package:shagher/packages/pages/Posts/models/post.dart';
+import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/requests.dart';
 import 'package:shagher/packages/pages/user/views/company_profile.dart';
 import 'package:shagher/service/theme/app_theme.dart';
@@ -11,13 +15,29 @@ import 'package:shagher/widget/post_details_widget.dart';
 
 // TODO refactor
 class PostCardDetails extends StatelessWidget {
-  const PostCardDetails({Key? key, bool isComp = false})
+  const PostCardDetails({Key? key, bool isComp = false, ModelPost? post})
       : _isComp = isComp,
+        _post = post,
         super(key: key);
 
+  final ModelPost? _post;
   final bool _isComp;
+
   @override
   Widget build(BuildContext context) {
+    _handleMovetoEdit(post) {
+      Get.to(AddPostWidget(docment: post));
+    }
+
+    _handleSoftDelete(post) async {
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(post.id)
+          .update({"status": 1});
+
+      //print("Object has been updated!");
+    }
+
     // ToDo post service
     return Card(
       child: Column(
@@ -25,12 +45,13 @@ class PostCardDetails extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _isComp
-              ? const Align(
+              ? Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      child: Icon(
+                      onTap: _handleMovetoEdit(_post),
+                      child: const Icon(
                         Icons.edit,
                         color: AppColors.grey,
                       ),
@@ -105,7 +126,13 @@ class PostCardDetails extends StatelessWidget {
                         onTap: () {},
                         width: 150,
                       )
-                    : Container(),
+                    : ElevatedBtn(
+                        title: 'Delete',
+                        onTap: () {},
+                        // ! fix this
+                        //onTap: _handleSoftDelete,
+                        width: 150,
+                      ),
               ],
             ),
           ),

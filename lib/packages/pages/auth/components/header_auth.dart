@@ -1,7 +1,6 @@
-import 'package:shagher/packages/components/space/size_box_height.dart';
+import 'package:shagher/themes/app_colors.dart';
 import 'package:shagher/util/path_images.dart';
 
-import '../../../../themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,8 +21,9 @@ class HeaderAuth extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // * arrow Back
+            // !!!
             ModalRoute.of(context)?.canPop ?? false
-                ? BackButton(color: AppColors.black)
+                ? const BackButton(color: AppColors.black)
                 : Container(),
             const Spacer(),
             // * Logo
@@ -31,13 +31,11 @@ class HeaderAuth extends StatelessWidget {
               scale: 1.6.w,
               child: const Image(
                 image: AssetImage(
-                  PathImages.appLogo,
+                  PathImages.blueLogo,
                 ),
               ),
             ),
-            Spacer(
-              flex: ModalRoute.of(context)?.canPop ?? false ? 2 : 1,
-            ),
+            Spacer(flex: ModalRoute.of(context)?.canPop ?? false ? 2 : 1),
           ],
         ),
       ),

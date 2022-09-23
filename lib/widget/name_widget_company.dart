@@ -13,12 +13,12 @@ class NameWidgetCompany extends StatelessWidget {
     return Column(
       children: [
         Text(
-          _company!.companyName,
+          _company!.companyName!,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
         ),
         const SizedBox(height: 4),
         Text(
-          _company!.specialty,
+          _company!.specialty!,
           style: AppTheme.h6(context),
         )
       ],

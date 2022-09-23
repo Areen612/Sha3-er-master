@@ -74,22 +74,22 @@ class _ToggleSwitchCompanyState extends State<ToggleSwitchCompany> {
         return ToggleButtons(
           //color: AppTheme.isDark(context) ? AppColors.bgWhite : AppColors.primary,
           selectedColor: AppColors.white,
-          fillColor: AppColors.black,
-          borderColor: AppColors.black,
+          fillColor: AppColors.primary,
+          borderColor: AppColors.primary,
           textStyle: AppTheme.h6(context),
           borderRadius: BorderRadius.circular(5.r),
           renderBorder: false,
           constraints: BoxConstraints.expand(width: constraints.maxWidth / 2),
-          children: const <Widget>[
-            Text(KeyLang.user),
-            Text(
-              KeyLang.company,
-            )
-          ],
+          children: const <Widget>[Text(KeyLang.user), Text(KeyLang.company)],
           onPressed: (int index) {
             widget._onSelected!(index);
             setState(() {
               for (int i = 0; i < _isSelected.length; i++) {
+                // if (i == index) {
+                //   _isSelected[i] = true;
+                // } else {
+                //   _isSelected[i] = false;
+                // }
                 _isSelected[i] = i == index;
               }
             });

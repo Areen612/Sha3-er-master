@@ -22,16 +22,16 @@ class _JobsPageState extends State<JobsWidget> {
   void initState() {
     super.initState();
     card.add(ModelPost(
-      id: 0,
+      id: '0',
       title: 'Company',
       requirements: 'req',
-      rangeSalary: '500-600',
+      // rangeSalary: '500-600',
     ));
     card.add(ModelPost(
-      id: 7,
+      id: '7',
       title: 'Company',
       requirements: 'req',
-      rangeSalary: '500-600',
+      // rangeSalary: '500-600',
     ));
   }
 

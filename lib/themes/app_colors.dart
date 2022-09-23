@@ -19,8 +19,8 @@ class AppColors {
 
   //static final Color primary = _colorFromHex('#ABDBE3');
   static final Color primary = _colorFromHex('#58c8ff');
-  static final Color primarybg = _colorFromHex('#FFF1F4F8');
-  static final Color secondary = _colorFromHex('#58c8ff');
+  static final Color primarybg = _colorFromHex('#F1F4F8');
+  static final Color secondary = _colorFromHex('#ABDBE3');
   static final Color blueDetailsBG = _colorFromHex('#a2e7f5');
   static final Color darkMode = _colorFromHex('#3A3B3C');
   static final Color darkModeCardDetails = _colorFromHex('#484848');

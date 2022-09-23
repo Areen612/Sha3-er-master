@@ -28,11 +28,11 @@ class PostCard extends StatelessWidget {
                           child: Image(
                               image: AssetImage(PathImages.profileImage))),
 
-                      title: Text(data.title),
+                      title: Text(data.title!),
                       //subtitle: Text(_company.companyName),
                     )
                   : ListTile(
-                      title: Text(data.title),
+                      title: Text(data.title!),
                       //subtitle: Text(_company.companyName),
                     ),
               Row(
@@ -40,7 +40,7 @@ class PostCard extends StatelessWidget {
                 children: <Widget>[
                   TextButton(
                     child: const Text('view post'),
-                    onPressed: () => _gotoDetailsPage(context, _isComp),
+                    onPressed: () => _gotoDetailsPage(context, _isComp, data),
                   ),
                   const SizedBox(width: 8),
                 ],
@@ -53,7 +53,7 @@ class PostCard extends StatelessWidget {
   }
 }
 
-void _gotoDetailsPage(BuildContext context, bool isComp) {
+void _gotoDetailsPage(BuildContext context, bool isComp, ModelPost data) {
   Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => Scaffold(
       appBar: AppBar(),
@@ -65,6 +65,7 @@ void _gotoDetailsPage(BuildContext context, bool isComp) {
             Expanded(
               flex: 2,
               child: PostCardDetails(
+                post: data,
                 isComp: isComp,
               ),
             ),

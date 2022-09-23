@@ -37,9 +37,10 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<ModelPost> matchQuery = [];
     for (var post in posts) {
-      if (post.requirements.toLowerCase().contains(query.toLowerCase()) ||
-          post.title.toLowerCase().contains(query.toLowerCase()) ||
-          post.rangeSalary.contains(query)) {
+      if (post.requirements!.toLowerCase().contains(query.toLowerCase()) ||
+          post.title!.toLowerCase().contains(query.toLowerCase()) ||
+          post.rangeSalaryStart! >= int.parse(query) ||
+          post.rangeSalaryEnd! <= int.parse(query)) {
         matchQuery.add(post);
       }
     }
@@ -57,9 +58,10 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     List<ModelPost> matchQuery = [];
     for (var post in posts) {
-      if (post.requirements.toLowerCase().contains(query.toLowerCase()) ||
-          post.title.toLowerCase().contains(query.toLowerCase()) ||
-          post.rangeSalary.contains(query)) {
+      if (post.requirements!.toLowerCase().contains(query.toLowerCase()) ||
+          post.title!.toLowerCase().contains(query.toLowerCase()) ||
+          post.rangeSalaryStart! >= int.parse(query) ||
+          post.rangeSalaryEnd! <= int.parse(query)) {
         matchQuery.add(post);
       }
     }

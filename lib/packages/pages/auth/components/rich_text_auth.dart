@@ -1,10 +1,10 @@
 import 'package:shagher/service/theme/app_theme.dart';
 
 import '../../../../themes/app_colors.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+// !!!!
 class RichTextAuth extends StatelessWidget {
   const RichTextAuth({
     Key? key,
@@ -27,7 +27,7 @@ class RichTextAuth extends StatelessWidget {
         style: DefaultTextStyle.of(context).style,
         children: [
           TextSpan(
-            text: _fword.tr(),
+            text: _fword, //.tr(),
             style: AppTheme.b1(context).copyWith(
               color: AppTheme.isDark(context)
                   ? AppColors.bgWhite
@@ -35,9 +35,9 @@ class RichTextAuth extends StatelessWidget {
             ),
           ),
           TextSpan(
-              text: _sword.tr(),
+              text: _sword, //.tr(),
               style: AppTheme.h6(context).copyWith(
-                color: AppColors.black,
+                color: AppColors.primary,
               ),
               recognizer: TapGestureRecognizer()..onTap = _onTap),
         ],

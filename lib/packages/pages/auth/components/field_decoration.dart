@@ -13,10 +13,11 @@ InputDecoration fieldDecoration(BuildContext context,
     helperMaxLines: 3,
     errorMaxLines: 3,
     contentPadding: contentPadding,
-    prefixIcon: Padding(
-      padding: EdgeInsets.all(10.h),
-      child: pIcon,
-    ),
+    prefixIcon:
+        // Padding(
+        //padding: EdgeInsets.all(10.h),
+        pIcon,
+    //),
     suffixIcon: Padding(
       padding: EdgeInsets.all(10.h),
       child: sIcon,
@@ -24,12 +25,14 @@ InputDecoration fieldDecoration(BuildContext context,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.r),
       borderSide: BorderSide(
-          color: AppTheme.isDark(context) ? AppColors.black : AppColors.grey),
+          color:
+              AppTheme.isDark(context) ? AppColors.grey : AppColors.secondary),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.r),
       borderSide: BorderSide(
-          color: AppTheme.isDark(context) ? AppColors.grey : AppColors.black),
+          color:
+              AppTheme.isDark(context) ? AppColors.primary : AppColors.primary),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.r),

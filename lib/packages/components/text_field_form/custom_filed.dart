@@ -77,7 +77,7 @@ class CustomField extends StatelessWidget {
       onChanged: _onChanged,
       decoration: fieldDecoration(
         context,
-        pIcon: _pIcon,
+        //pIcon: _pIcon,
         sIcon: _sIcon,
         labelText: _labelText?.tr(),
         helperText: _helperText?.tr(),

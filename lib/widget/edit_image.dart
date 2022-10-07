@@ -16,7 +16,7 @@ class EditableImage extends StatelessWidget {
         super(key: key);
 
   final String? imagePath;
-  final VoidCallback onClicked;
+  final dynamic onClicked;
   final double _width;
   final double _height;
 

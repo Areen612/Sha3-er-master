@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:shagher/packages/pages/auth/view/manage_role.dart';
 import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/landscape.dart';
 import 'package:shagher/packages/pages/Posts/traing/views/body.dart';
@@ -34,5 +35,6 @@ class AppRoutes {
     CompanyProfileUser.id: (context) => const CompanyProfileUser(),
     SettingsWidget.id: (context) => const SettingsWidget(),
     RequestsWidget.id: (context) => const RequestsWidget(),
+    ManageRole.id: (context) => const ManageRole(),
   };
 }

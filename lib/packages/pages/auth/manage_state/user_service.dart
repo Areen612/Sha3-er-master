@@ -49,6 +49,14 @@ class UserAuthService extends ChangeNotifier {
     return null;
   }
 
+  // Future<User?> verify() async {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user != null && !user.emailVerified) {
+  //     await user.sendEmailVerification();
+  //   }
+  //   return null;
+  // }
+
   // * Login
   Future<User?> login({
     required ModelUserAuth data,
@@ -60,6 +68,9 @@ class UserAuthService extends ChangeNotifier {
         email: data.email!,
         password: data.password!,
       );
+
+      // final prefs = await SharedPreferences.getInstance();
+      // await prefs.setString("userId", _authResult.user!.uid);
 
       late User _user;
       if (_authResult.user?.uid.isNotEmpty ?? false) {

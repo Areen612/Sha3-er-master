@@ -1,19 +1,39 @@
 import 'package:shagher/packages/pages/cv/models/cv.dart';
 
-class User {
+import '../../../../util/api_key.dart';
+
+class ModelUser {
+  String? uid;
   String? firstName;
   String? lastName;
-  String? password;
   String? imageUrl;
   String? email;
-  List<ModelCv>? cv;
+  ModelCv? cv;
 
-  User({
+  ModelUser({
+    this.uid,
     this.firstName,
     this.lastName,
-    this.password,
     this.imageUrl,
     this.email,
     this.cv,
   });
+  ModelUser.fromMap(Map<dynamic, dynamic> data) {
+    uid = data[KeyApi.id];
+    firstName = data[KeyApi.firstName];
+    lastName = data[KeyApi.lastName];
+    email = data[KeyApi.email];
+    imageUrl = data[KeyApi.imageUrl];
+    cv = data[KeyApi.cv];
+  }
+
+  Map<dynamic, dynamic> toMap() {
+    final Map<dynamic, dynamic> data = <dynamic, dynamic>{};
+    data[KeyApi.firstName] = firstName;
+    data[KeyApi.lastName] = lastName;
+    data[KeyApi.email] = email;
+    data[KeyApi.imageUrl] = imageUrl;
+    data[KeyApi.cv] = cv;
+    return data;
+  }
 }

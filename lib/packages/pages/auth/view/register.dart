@@ -1,6 +1,5 @@
-import 'package:get/route_manager.dart';
 import 'package:shagher/packages/components/button/simple_btn.dart';
-import 'package:shagher/packages/pages/auth/components/company_reg.dart';
+import 'package:shagher/packages/pages/auth/view/company_register.dart';
 import 'package:shagher/packages/pages/auth/components/field_fname.dart';
 import 'package:shagher/packages/pages/auth/components/field_lname.dart';
 import 'package:shagher/packages/pages/auth/components/toggle_switch.dart';
@@ -42,25 +41,36 @@ class PageRegisterState extends State<RegisterWidget> {
     // * Auth Provider
     final UserAuthService _auth = Provider.of<UserAuthService>(context);
     final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
-    int _selectedIndex = 0;
+    final List<bool> _isSelected = [true, false];
+    //int _selectedIndex = 0;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.w),
         child: Form(
           key: _keyForm,
-          child: Column(
+          child: ListView(
             children: [
               // * Header Auth
               const HeaderAuth(),
+              // DropDownList(
+              //   onChanged: (p0) {
+              //     flag = p0;
+              //   },
+              // ),
               ToggleSwitchCompany(onSelected: (index) {
                 setState(() {
-                  _selectedIndex = index;
-                  // flag = index;
+                  //_selectedIndex = index;
+                  //flag = index;
+                  // SharedVariables.toggleValue = index;
+                  // print(SharedVariables.toggleValue);
+                  // flag = SharedVariables.toggleValue;
+                  //print('flag $flag index $index');
                 });
+                flag = index;
               }),
 
               Visibility(
-                // replacement: const RegCompanyColumn(),
+                replacement: CompanyRegistraion(),
                 child: Column(
                   children: [
                     const SBH(),
@@ -89,14 +99,14 @@ class PageRegisterState extends State<RegisterWidget> {
                     ),
                     const SBH(h: 20),
                     // index stack
-                    IndexedStack(
-                      index: _selectedIndex,
-                      children: [
-                        const RegisterWidget(),
-                        const RegCompanyColumn(),
-                        CvForm(userAuth: _userAuth),
-                      ],
-                    ),
+                    // IndexedStack(
+                    //   index: _selectedIndex,
+                    //   children: [
+                    //     const RegisterWidget(),
+                    //     const RegCompanyColumn(),
+                    //     CvForm(userAuth: _userAuth),
+                    //   ],
+                    // ),
                     // * button
                     Center(
                       child: _auth.isLoading
@@ -105,17 +115,17 @@ class PageRegisterState extends State<RegisterWidget> {
                           : SimpleBtn(
                               btnTitle: KeyLang.cont,
                               onTap: () {
-                                Get.to(CvForm(userAuth: _userAuth));
-                                _selectedIndex = 2;
+                                //Get.to(CvForm(userAuth: _userAuth));
+                                // _selectedIndex = 2;
                                 if (_keyForm.currentState?.validate() ??
                                     false) {
                                   _keyForm.currentState?.save();
-                                  Get.to(CvForm(userAuth: _userAuth));
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             CvForm(userAuth: userAuth)));
+                                  // Get.to(CvForm(userAuth: _userAuth));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CvForm(userAuth: _userAuth)));
 
                                   //Navigator.pushNamed(context, CvForm.id);
                                 }
@@ -147,7 +157,7 @@ class PageRegisterState extends State<RegisterWidget> {
                     ),
                   ],
                 ),
-                //visible: flag == 0 ? true : false,
+                visible: flag == 0 ? true : false,
                 //_replace(flag),
               ),
             ],

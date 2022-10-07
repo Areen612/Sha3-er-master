@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shagher/packages/components/text_field_form/custom_filed.dart';
 import 'package:shagher/service/validotors/app_validators.dart';
@@ -14,11 +15,13 @@ class FieldPass extends StatefulWidget {
     void Function(String)? onChanged,
     String? hint,
     String? helperText,
+    TextEditingController? controller,
   })  : _valuePass = valuePass,
         _onValidators = onValidators,
         _onChanged = onChanged,
         _hint = hint,
         _helperText = helperText,
+        _controller = controller,
         super(key: key);
 
   @override
@@ -28,6 +31,7 @@ class FieldPass extends StatefulWidget {
   final void Function(String)? _onChanged;
   final String? _hint;
   final String? _helperText;
+  final TextEditingController? _controller;
 }
 
 // !!!
@@ -39,7 +43,7 @@ class _FieldPassState extends State<FieldPass> {
   Widget build(BuildContext context) {
     return CustomField(
       hint: widget._hint, //?.tr(),
-      labelText: KeyLang.pass, //.tr(),
+      labelText: KeyLang.pass.tr(),
       helperText: widget._helperText, //?.tr(),
       isObscureText: _obscureText,
       pIcon: PathIcons.passIcon,
@@ -54,6 +58,7 @@ class _FieldPassState extends State<FieldPass> {
       onChanged: widget._onChanged,
       onValidator: widget._onValidators,
       onSaved: widget._valuePass,
+      controller: widget._controller,
     );
   }
 

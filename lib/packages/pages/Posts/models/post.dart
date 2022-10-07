@@ -28,6 +28,15 @@ class ModelPost {
     this.status,
   });
 
+  // String get getTitle => title!;
+  // String get getRequirements => requirements!;
+  // String get getDescription => description!;
+  // String get getRangeSalary => rangeSalary!;
+  // String get getType => type!;
+  // String get getSubType => subType!;
+  // String get getCreator => creator!;
+  // int get getStatus => status!;
+
   setTitle(String? title) => this.title = title ?? '';
   setRequirements(String? requirements) =>
       this.requirements = requirements ?? '';
@@ -57,18 +66,50 @@ class ModelPost {
     };
   }
 
-  ModelPost.fromMap(Map<String, dynamic> data) {
-    id = data[KeyApi.id];
-    title = data[KeyApi.title];
-    requirements = data[KeyApi.requirements];
-    description = data[KeyApi.description];
-    rangeSalary = data[KeyApi.rangeSalary];
-    rangeSalaryStart = data[KeyApi.rangeSalaryStart];
-    rangeSalaryEnd = data[KeyApi.rangeSalaryEnd];
-    type = data[KeyApi.type];
-    subType = data[KeyApi.subType];
-    creator = data[KeyApi.creator];
-    status = data[KeyApi.status];
+  // ModelPost.fromMap(Map<String, dynamic> data) {
+  //   id = data[KeyApi.id];
+  //   title = data[KeyApi.title];
+  //   requirements = data[KeyApi.requirements];
+  //   description = data[KeyApi.description];
+  //   rangeSalary = data[KeyApi.rangeSalary];
+  //   rangeSalaryStart = data[KeyApi.rangeSalaryStart];
+  //   rangeSalaryEnd = data[KeyApi.rangeSalaryEnd];
+  //   type = data[KeyApi.type];
+  //   subType = data[KeyApi.subType];
+  //   creator = data[KeyApi.creator];
+  //   status = data[KeyApi.status];
+  // }
+  factory ModelPost.fromFirestore(DocumentSnapshot doc) {
+    Map<dynamic, dynamic> data = doc.data as Map<dynamic, dynamic>;
+
+    return ModelPost(
+      title: data[KeyApi.title],
+      requirements: data[KeyApi.requirements],
+      description: data[KeyApi.description],
+      rangeSalary: data[KeyApi.rangeSalary],
+      rangeSalaryStart: data[KeyApi.rangeSalaryStart],
+      rangeSalaryEnd: data[KeyApi.rangeSalaryEnd],
+      type: data[KeyApi.type],
+      subType: data[KeyApi.subType],
+      creator: data[KeyApi.creator],
+      status: data[KeyApi.status],
+    );
+  }
+
+  factory ModelPost.fromMap(Map data) {
+    data = data;
+    return ModelPost(
+      title: data[KeyApi.title],
+      requirements: data[KeyApi.requirements],
+      description: data[KeyApi.description],
+      rangeSalary: data[KeyApi.rangeSalary],
+      rangeSalaryStart: data[KeyApi.rangeSalaryStart],
+      rangeSalaryEnd: data[KeyApi.rangeSalaryEnd],
+      type: data[KeyApi.type],
+      subType: data[KeyApi.subType],
+      creator: data[KeyApi.creator],
+      status: data[KeyApi.status],
+    );
   }
 
   ModelPost.fromQueryDocumentSnapshot(QueryDocumentSnapshot data) {

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\build\windows\CMakeFiles\ededd32b336bd501ed7b9209d92a771f\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\build\windows\CMakeFiles\358e0f3e4c1e55e3ef5c5a00efdce435\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\build\windows\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F289D816-75C2-3E55-96E2-B9EDD86BEAEF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

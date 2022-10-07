@@ -7,6 +7,7 @@ class KeyLang {
   static const String tourHeaderThree = 'tourHeaderThree';
   // * app
   static const String user = 'user';
+  static const String imageUrl = 'imageUrl';
   static const String company = 'company';
   static const String appName = 'appName';
   static const String welcomeMessage = 'welcomeMessage';

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shagher/language/generated/key_lang.dart';
+import 'package:shagher/packages/pages/auth/manage_state/company_service.dart';
+import 'package:shagher/packages/pages/auth/view/login.dart';
 import 'package:shagher/packages/pages/settings/components/lang/alert_lang.dart';
 import 'package:shagher/packages/pages/user/views/user_profile.dart';
 import 'package:shagher/service/lang/app_lang.dart';
@@ -24,6 +26,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   Widget build(BuildContext context) {
     final ThemeChange _themeProvider = Provider.of<ThemeChange>(context);
     _themeText = AppTheme.isDark(context) ? KeyLang.dark : KeyLang.light;
+    final CompanyAuthService _auth = Provider.of<CompanyAuthService>(context);
     return Scaffold(
       body: ListView(
         //padding: const EdgeInsets.only(top: 40),
@@ -76,6 +79,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               leading: const Icon(Icons.logout),
               title: Text(KeyLang.logout.tr()),
               contentPadding: const EdgeInsets.only(left: 40),
+              //onTap: _auth.signOut,
+              onTap: () {
+                _auth.signOut();
+                Navigator.pushNamed(context, LoginWidget.id);
+              },
               //style: ListTileStyle.list,
               // trailing: const Icon(Icons.arrow_forward_ios),
             ),

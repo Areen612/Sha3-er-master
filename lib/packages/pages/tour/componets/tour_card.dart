@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/themes/app_colors.dart';
 
 class TourCard extends StatelessWidget {
   const TourCard(
       {Key? key,
-      required String image,
+      required SvgPicture image,
       required String title,
       String subtitle = ''})
       : _image = image,
@@ -14,7 +15,7 @@ class TourCard extends StatelessWidget {
         _subTitle = subtitle,
         super(key: key);
 
-  final String _image;
+  final SvgPicture _image;
   final String _title;
   final String _subTitle;
 
@@ -37,12 +38,7 @@ class TourCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Image.asset(
-                    _image,
-                    width: 350.w,
-                    height: 300.h,
-                    fit: BoxFit.contain,
-                  ),
+                  child: _image,
                 ),
                 Expanded(
                   flex: 1,
@@ -55,7 +51,7 @@ class TourCard extends StatelessWidget {
                       //mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SBH(h: 16),
+                        const SBH(h: 10),
                         // TODO rich text
                         Text(
                           _title,

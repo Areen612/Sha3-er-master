@@ -1,0 +1,10 @@
+^C:\USERS\CHICK61\SOURCE\REPOS\FLUTTERPROJECTS\SHA3-ER-MASTER\SHA3-ER-MASTER\BUILD\WINDOWS\CMAKEFILES\E97E79E2DBCBD7FA9128CBF2EADFC9F9\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

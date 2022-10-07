@@ -1,0 +1,10 @@
+^C:\USERS\CHICK61\SOURCE\REPOS\FLUTTERPROJECTS\SHA3-ER-MASTER\SHA3-ER-MASTER\BUILD\WINDOWS\CMAKEFILES\E97E79E2DBCBD7FA9128CBF2EADFC9F9\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/windows -BC:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/build/windows/shagher.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

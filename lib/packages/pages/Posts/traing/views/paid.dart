@@ -19,23 +19,31 @@ class PaidWidgetState extends State<PaidWidget> {
         id: '0',
         title: 'Company 1',
         requirements: 'flutter developer',
-        // rangeSalary: '400-600',
+        rangeSalary: '400-600',
         type: 'paid'));
     cards.add(ModelPost(
         id: '7',
         title: 'Company 2',
         requirements: 'database adiminstaror',
-        // rangeSalary: '500-600',
+        rangeSalary: '500-600',
         type: 'paid'));
   }
 
   @override
   Widget build(BuildContext context) {
+    // final postProvider = Provider.of<PostProvider>(context);
     return ListView.builder(
       itemCount: cards.length,
       itemBuilder: (context, index) {
         return PostCard(data: cards[index]);
       },
     );
+    // final postsList = Provider.of<List<ModelPost>>(context);
+    // return ListView.builder(
+    //   itemCount: postsList.length,
+    //   itemBuilder: (context, index) {
+    //     return PostCard(data: postsList[index]);
+    //   },
+    // );
   }
 }

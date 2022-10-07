@@ -19,13 +19,21 @@ class _CompanyLandScapeState extends State<CompanyLandScape> {
   //   const CompanyHomeWidget(),
   //   const SettingsWidget(),
   // ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          // InkWell(
+          //     onTap: () => Navigator.of(context).pushReplacement(
+          //         MaterialPageRoute(
+          //             builder: (context) => const SettingsWidget())),
+          //     child: const Icon(Icons.abc_sharp)),
           IconButton(
-            onPressed: () => _navSettings(context),
+            onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                    builder: (context) => const SettingsWidget())),
             iconSize: 30,
             padding: AppLang.currentLang(context) == 'en'
                 ? const EdgeInsets.only(right: 20)

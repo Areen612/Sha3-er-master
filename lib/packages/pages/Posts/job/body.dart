@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shagher/packages/pages/Posts/components/post_card.dart';
 import 'package:shagher/packages/pages/Posts/models/post.dart';
 
@@ -17,33 +18,17 @@ class JobsWidget extends StatefulWidget {
 }
 
 class _JobsPageState extends State<JobsWidget> {
-  List<ModelPost> card = [];
-  @override
-  void initState() {
-    super.initState();
-    card.add(ModelPost(
-      id: '0',
-      title: 'Company',
-      requirements: 'req',
-      // rangeSalary: '500-600',
-    ));
-    card.add(ModelPost(
-      id: '7',
-      title: 'Company',
-      requirements: 'req',
-      // rangeSalary: '500-600',
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
+    //final postProvider = Provider.of<PostProvider>(context);
+    final postsList = Provider.of<List<ModelPost>>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         body: ListView.builder(
-          itemCount: card.length,
+          itemCount: postsList.length,
           itemBuilder: (context, index) {
-            return PostCard(data: card[index]);
+            return PostCard(data: postsList[index]);
           },
         ),
         //drawer: const DrawerBody(),

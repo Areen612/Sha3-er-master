@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\build\windows\CMakeFiles\67d0b3279033d01e84dee85bd4a16afd\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F289D816-75C2-3E55-96E2-B9EDD86BEAEF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

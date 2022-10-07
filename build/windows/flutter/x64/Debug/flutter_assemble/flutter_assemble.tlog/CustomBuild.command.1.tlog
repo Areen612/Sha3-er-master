@@ -1,0 +1,28 @@
+^C:\USERS\CHICK61\SOURCE\REPOS\FLUTTERPROJECTS\SHA3-ER-MASTER\SHA3-ER-MASTER\BUILD\WINDOWS\CMAKEFILES\EDEDD32B336BD501ED7B9209D92A771F\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\chick61\src\flutter PROJECT_DIR=C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master FLUTTER_ROOT=C:\Users\chick61\src\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\windows\flutter\ephemeral PROJECT_DIR=C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master FLUTTER_TARGET=C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\chick61\source\repos\FlutterProjects\Sha3-er-master\Sha3-er-master\.dart_tool\package_config.json C:/Users/chick61/src/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CHICK61\SOURCE\REPOS\FLUTTERPROJECTS\SHA3-ER-MASTER\SHA3-ER-MASTER\BUILD\WINDOWS\CMAKEFILES\358E0F3E4C1E55E3EF5C5A00EFDCE435\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CHICK61\SOURCE\REPOS\FLUTTERPROJECTS\SHA3-ER-MASTER\SHA3-ER-MASTER\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/windows -BC:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/build/windows --check-stamp-file C:/Users/chick61/source/repos/FlutterProjects/Sha3-er-master/Sha3-er-master/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

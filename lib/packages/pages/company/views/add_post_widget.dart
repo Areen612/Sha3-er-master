@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shagher/language/generated/key_lang.dart';
 import 'package:shagher/packages/components/button/elevated_btn.dart';
@@ -23,6 +24,7 @@ class AddPostWidget extends StatefulWidget {
 
 class _AddPostWidgetState extends State<AddPostWidget> {
   final _keyForm = GlobalKey<FormState>();
+  User? user = FirebaseAuth.instance.currentUser;
   RangeValues _currentRangeValues = const RangeValues(250, 500);
   final ModelPost _modelPost = ModelPost();
 
@@ -33,9 +35,12 @@ class _AddPostWidgetState extends State<AddPostWidget> {
   final TextEditingController _controllerTitle = TextEditingController();
   final TextEditingController _controllerRequirements = TextEditingController();
   final TextEditingController _controllerDescription = TextEditingController();
+
+  // Map<String, dynamic> routeData;
   @override
   void initState() {
     super.initState();
+
     if (widget.docment != null) {
       _controllerTitle.text = widget.docment[KeyApi.title];
       _controllerRequirements.text = widget.docment[KeyApi.requirements];
@@ -45,7 +50,37 @@ class _AddPostWidgetState extends State<AddPostWidget> {
       // ! fix this
       _currentRangeValues = widget.docment[KeyApi.rangeSalary];
     }
+    _modelPost.id = user!.uid;
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Future.delayed(const Duration(microseconds: 10), () {
+  //     routeData =
+  //         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+  //   }).then((_) => routeData == null
+  //       ? Future.delayed(Duration.zero, () {
+  //           clearData();
+  //           final postProvider =
+  //               Provider.of<PostProvider>(context, listen: false);
+  //           postProvider.loadValues(ModelPost());
+  //         })
+  //       : Future.delayed(Duration.zero, () {
+  //           // print(routeData);
+  //           // nameController.text = routeData['productName'];
+  //           // priceController.text = routeData['productPrice'].toString();
+
+  //           final postProvider =
+  //               Provider.of<PostProvider>(context, listen: false);
+  //           ModelPost post = ModelPost(
+  //               // productId: routeData['productId'],
+  //               // price: routeData['productPrice'],
+  //               // productName: routeData['productName'],
+  //               );
+  //           postProvider.loadValues(post);
+  //         }));
+  // }
 
   _handleSubmitAction() async {
     if (_keyForm.currentState!.validate()) {
@@ -53,23 +88,31 @@ class _AddPostWidgetState extends State<AddPostWidget> {
         await FirebaseFirestore.instance
             .collection("posts")
             .doc(widget.docment.id)
-            .update({
-          KeyApi.title: _modelPost.title,
-          KeyApi.requirements: _modelPost.requirements,
-          KeyApi.description: _modelPost.description,
-          KeyApi.type: _modelPost.type,
-          KeyApi.subType: _modelPost.subType,
-          KeyApi.rangeSalary: _modelPost.rangeSalary,
-        });
+            .update(_modelPost.toMap()
+                //       {
+                //   KeyApi.title: _modelPost.title,
+                //   KeyApi.requirements: _modelPost.requirements,
+                //   KeyApi.description: _modelPost.description,
+                //   KeyApi.type: _modelPost.type,
+                //   KeyApi.subType: _modelPost.subType,
+                //   KeyApi.rangeSalary: _modelPost.rangeSalary,
+                // }
+
+                );
       } else {
-        await FirebaseFirestore.instance.collection("posts").add({
-          KeyApi.title: _modelPost.title,
-          KeyApi.requirements: _modelPost.requirements,
-          KeyApi.description: _modelPost.description,
-          KeyApi.type: _modelPost.type,
-          KeyApi.subType: _modelPost.subType,
-          KeyApi.rangeSalary: _modelPost.rangeSalary,
-        });
+        await FirebaseFirestore.instance
+            .collection("posts")
+            .add(_modelPost.toMap()
+                //   {
+                //   KeyApi.title: _modelPost.title,
+                //   KeyApi.requirements: _modelPost.requirements,
+                //   KeyApi.description: _modelPost.description,
+                //   KeyApi.type: _modelPost.type,
+                //   KeyApi.subType: _modelPost.subType,
+                //   KeyApi.rangeSalary: _modelPost.rangeSalary,
+                // }
+
+                );
       }
       Navigator.pop(context);
     }

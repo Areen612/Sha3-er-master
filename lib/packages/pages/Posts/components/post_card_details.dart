@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/packages/components/space/size_box_width.dart';
@@ -26,7 +25,10 @@ class PostCardDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _handleMovetoEdit(post) {
-      Get.to(AddPostWidget(docment: post));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: ((context) => AddPostWidget(docment: post))));
     }
 
     _handleSoftDelete(post) async {

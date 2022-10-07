@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shagher/service/theme/app_theme.dart';
 
 import '../../../themes/app_colors.dart';
@@ -40,7 +41,7 @@ class SimpleBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.r),
         ),
         child: Text(
-          _btnTitle, //.tr(),
+          _btnTitle.tr(),
           style: AppTheme.h5(context).copyWith(color: AppColors.bgWhite),
         ),
       ),

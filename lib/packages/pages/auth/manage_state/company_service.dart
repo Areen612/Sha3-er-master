@@ -48,6 +48,14 @@ class CompanyAuthService extends ChangeNotifier {
     return null;
   }
 
+  Future<User?> verify() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+    return null;
+  }
+
   // * Login
   Future<User?> loginCompany({
     required ModelCompanyAuth data,
@@ -103,7 +111,7 @@ class CompanyAuthService extends ChangeNotifier {
 
   // * signOut
   Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+    await FirebaseAuth.instance.signOut();
   }
 
   // * get Data Company

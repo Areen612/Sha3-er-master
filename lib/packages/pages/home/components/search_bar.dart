@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shagher/packages/pages/Posts/components/post_card.dart';
 import 'package:shagher/packages/pages/Posts/models/post.dart';
-import 'package:shagher/packages/pages/Posts/traing/views/paid.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  // Demo list to show querying
-  List<ModelPost> posts = PaidWidgetState.cards;
-
-  // first overwrite to
-  // clear the search text
   @override
   List<Widget>? buildActions(BuildContext context) {
+    // final posts = Provider.of<List<ModelPost>>(context);
     return [
       IconButton(
         onPressed: () {
@@ -35,6 +31,7 @@ class CustomSearchDelegate extends SearchDelegate {
   // third overwrite to show query result
   @override
   Widget buildResults(BuildContext context) {
+    List<ModelPost> posts = Provider.of<List<ModelPost>>(context);
     List<ModelPost> matchQuery = [];
     for (var post in posts) {
       if (post.requirements!.toLowerCase().contains(query.toLowerCase()) ||
@@ -56,6 +53,7 @@ class CustomSearchDelegate extends SearchDelegate {
   // querying process at the runtime
   @override
   Widget buildSuggestions(BuildContext context) {
+    List<ModelPost> posts = Provider.of<List<ModelPost>>(context);
     List<ModelPost> matchQuery = [];
     for (var post in posts) {
       if (post.requirements!.toLowerCase().contains(query.toLowerCase()) ||

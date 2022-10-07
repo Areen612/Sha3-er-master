@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shagher/util/api_key.dart';
 
 class ModelCv {
@@ -24,27 +25,27 @@ class ModelCv {
       this.city,
       this.creator});
 
-  ModelCv.fromJson(Map<String, dynamic> json) {
-    firstName = json[KeyApi.firstName];
-    lastName = json[KeyApi.lastName];
-    birthDate = json[KeyApi.birthDate];
-    experience = json[KeyApi.experience];
-    skills = json[KeyApi.skills];
-    mobileNumber = json[KeyApi.phoneNumber];
-    email = json[KeyApi.email];
-    country = json[KeyApi.country];
-    city = json[KeyApi.city];
-    creator = json[KeyApi.creator];
+  ModelCv.fromQueryDocumentSnapshot(QueryDocumentSnapshot data) {
+    firstName = data[KeyApi.firstName];
+    lastName = data[KeyApi.lastName];
+    birthDate = data[KeyApi.birthDate];
+    experience = data[KeyApi.experience];
+    skills = data[KeyApi.skills];
+    mobileNumber = data[KeyApi.mobileNumber];
+    email = data[KeyApi.email];
+    country = data[KeyApi.country];
+    city = data[KeyApi.city];
+    creator = data[KeyApi.creator];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data[KeyApi.firstName] = firstName;
     data[KeyApi.lastName] = lastName;
     data[KeyApi.birthDate] = birthDate;
     data[KeyApi.experience] = experience;
     data[KeyApi.skills] = skills;
-    data[KeyApi.phoneNumber] = mobileNumber;
+    data[KeyApi.mobileNumber] = mobileNumber;
     data[KeyApi.email] = email;
     data[KeyApi.country] = country;
     data[KeyApi.city] = city;

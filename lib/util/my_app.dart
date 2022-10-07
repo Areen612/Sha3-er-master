@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,8 +14,11 @@ import 'package:shagher/packages/pages/auth/manage_state/company_service.dart';
 import 'package:shagher/packages/pages/auth/manage_state/user_service.dart';
 import 'package:shagher/service/restart/restart_app.dart';
 import 'package:shagher/themes/change_theme.dart';
+import '../packages/pages/Posts/models/post.dart';
 import '../packages/pages/splash/views/body.dart';
 import '../routes/app_routes.dart';
+import '../service/firestore/firestore_services.dart';
+import '../service/provider/post_provider.dart';
 import '../themes/custom_theme.dart';
 
 class AppScrollBehavior extends MaterialScrollBehavior {
@@ -30,6 +34,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firestoreService = FireStoreService();
     return FutureBuilder<FirebaseApp>(
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
@@ -41,11 +46,20 @@ class MyApp extends StatelessWidget {
             return RestartWidget(
                 child: MultiProvider(
               providers: [
+                //ChangeNotifierProvider(create: (context) => SharedVariables()),
                 ChangeNotifierProvider(create: (context) => ThemeChange()),
                 ChangeNotifierProvider(create: (contex) => ManageStatePost()),
                 ChangeNotifierProvider(create: (context) => UserAuthService()),
                 ChangeNotifierProvider(
-                    create: (context) => CompanyAuthService())
+                    create: (context) => CompanyAuthService()),
+                ChangeNotifierProvider(create: (context) => PostProvider()),
+                StreamProvider<User?>.value(
+                    value: FirebaseAuth.instance.authStateChanges(),
+                    initialData: null
+                    //   var user = Provider.of<FirebaseUser>(context);
+                    ),
+                StreamProvider<List<ModelPost>>.value(
+                    value: firestoreService.getPosts(), initialData: const [])
               ],
               child: Builder(builder: (context) {
                 final ThemeChange _themeProvider =

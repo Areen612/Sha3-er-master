@@ -1,6 +1,6 @@
 class KeyApi {
   // * company
-  static const String company = "Company";
+  static const String company = "company";
   static const String companyName = 'companyName';
   static const String password = 'password';
   static const String email = 'email';
@@ -33,8 +33,10 @@ class KeyApi {
   static const String birthDate = 'birthDate';
   static const String experience = 'experience';
   static const String skills = 'skills';
-  static const String phoneNumber = 'mobileNumber';
+  static const String mobileNumber = 'mobileNumber';
   // * user
   static const String id = "id";
   static const String user = 'user';
+  // * role
+  static const String role = 'role';
 }

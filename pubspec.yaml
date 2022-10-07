@@ -55,10 +55,14 @@ dependencies:
   provider: ^6.0.1
   shared_preferences: ^2.0.15
   # Firebase
-  firebase_core: ^1.21.0
+  firebase_core: ^1.23.0
   firebase_auth: ^3.6.4
   cloud_firestore: ^3.4.5
   firebase_storage: ^10.3.8
+  uuid: ^3.0.6
+  # package_info: ^0.4.3
+  # device_info: ^0.4.2+8
+
   # Toast
   fluttertoast: ^8.0.8
   #toggle_switch: ^2.0.1
@@ -70,11 +74,14 @@ dependencies:
   # switch animation between light and dark theme
   animated_theme_switcher: ^2.0.1-nullsafety.0
   # getx
-  get: ^4.6.5
+  #get: ^4.6.5
   # rating bar
   flutter_rating_bar: ^4.0.1
   # image picker 
   image_picker: ^0.8.5+3
+  file_picker: ^5.2.0+1
+  flutter_downloader: ^1.8.4
+  comment_box: ^0.0.17
   cloud_firestore_odm: ^1.0.0-dev.30
   json_annotation: ^4.7.0
 

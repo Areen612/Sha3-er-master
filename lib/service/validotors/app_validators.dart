@@ -16,6 +16,7 @@ class AppValidators {
     if (valueTrim?.isEmpty ?? true) {
       return _messageEnterValue;
     }
+    return null;
   }
 
   // * Email
@@ -26,17 +27,28 @@ class AppValidators {
     } else if (!validators.isEmail(valueTrim!)) {
       return _messageCorrectEmail;
     }
+    return null;
   }
 
   static String? isPass(String? value) {
     final String? valueTrim = value?.trim();
     if (valueTrim?.isEmpty ?? true) {
       return _messageEnterValue;
-    } else if (!validators.matches(value!,
-        r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$')) {
+    } else if (!validators.isLength(valueTrim!, 6)) {
       return _messageCorrectPass;
     }
+    return null;
   }
+
+  // static String? isPass(String? value) {
+  //   final String? valueTrim = value?.trim();
+  //   if (valueTrim?.isEmpty ?? true) {
+  //     return _messageEnterValue;
+  //   } else if (!validators.matches(value!,
+  //       r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$')) {
+  //     return _messageCorrectPass;
+  //   }
+  // }
 
   // * equal Pass
   static String? isEqualPass(String? value, String pass) {
@@ -46,6 +58,7 @@ class AppValidators {
     } else if (!validators.equals(valueTrim, pass.trim())) {
       return _messageCorrectCPass;
     }
+    return null;
   }
 
   static String? isNum(String? value) {
@@ -55,5 +68,6 @@ class AppValidators {
     } else if (!validators.isLength(valueTrim!, 9)) {
       return _messageCorrectNum;
     }
+    return null;
   }
 }

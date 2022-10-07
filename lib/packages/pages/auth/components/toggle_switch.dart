@@ -51,6 +51,7 @@ import 'package:shagher/themes/app_colors.dart';
 //     );
 //   }
 // }
+
 // * TODO Tabs
 class ToggleSwitchCompany extends StatefulWidget {
   const ToggleSwitchCompany({Key? key, void Function(int)? onSelected})
@@ -64,8 +65,11 @@ class ToggleSwitchCompany extends StatefulWidget {
 
 class _ToggleSwitchCompanyState extends State<ToggleSwitchCompany> {
   final List<bool> _isSelected = [true, false];
+  static int? flag;
+
   @override
   Widget build(BuildContext context) {
+    //final SharedVariables toggle = Provider.of<SharedVariables>(context);
     return SizedBox(
       // ignore: avoid_unnecessary_containers
       width: 320.w,
@@ -82,7 +86,6 @@ class _ToggleSwitchCompanyState extends State<ToggleSwitchCompany> {
           constraints: BoxConstraints.expand(width: constraints.maxWidth / 2),
           children: const <Widget>[Text(KeyLang.user), Text(KeyLang.company)],
           onPressed: (int index) {
-            widget._onSelected!(index);
             setState(() {
               for (int i = 0; i < _isSelected.length; i++) {
                 // if (i == index) {
@@ -91,6 +94,10 @@ class _ToggleSwitchCompanyState extends State<ToggleSwitchCompany> {
                 //   _isSelected[i] = false;
                 // }
                 _isSelected[i] = i == index;
+                //print('toggle $index');
+                //SharedVariables.toggleValue = index;
+                //print(SharedVariables.toggleValue);
+                widget._onSelected!(index);
               }
             });
           },

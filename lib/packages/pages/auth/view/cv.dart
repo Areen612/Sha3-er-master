@@ -1,6 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +15,7 @@ import 'package:shagher/packages/pages/auth/components/field_country.dart';
 import 'package:shagher/packages/pages/auth/components/field_exp.dart';
 import 'package:shagher/packages/pages/auth/components/field_phone.dart';
 import 'package:shagher/packages/pages/auth/components/field_skills.dart';
+import 'package:shagher/packages/pages/auth/components/field_specialty.dart';
 import 'package:shagher/packages/pages/auth/manage_state/user_service.dart';
 import 'package:shagher/packages/pages/auth/model/user_auth.dart';
 import 'package:shagher/packages/pages/home/views/body.dart';
@@ -19,7 +24,6 @@ import '../../../../language/generated/key_lang.dart';
 import '../../../components/loading/app_loading.dart';
 import '../../../components/loading/enum_loading.dart';
 import '../../../components/space/size_box_height.dart';
-import '../../../components/toast/custom_toast.dart';
 import '../components/header_auth.dart';
 
 class CvForm extends StatelessWidget {
@@ -32,26 +36,57 @@ class CvForm extends StatelessWidget {
         super(key: key);
 
   final ModelUserAuth? _userAuth;
+
   @override
   Widget build(BuildContext context) {
     final UserAuthService _auth = Provider.of<UserAuthService>(context);
+    // _handleAddNewDocument() async {
+    //   if (_keyForm.currentState!.validate()) {
+    //     CollectionReference users =
+
+    //     DocumentReference insertedDocument =
+    //         await users.add(_userAuth!.toMap());
+    //     //   {
+    //     //   "firstName": _userAuth!.firstName,
+    //     //   "lastName": _userAuth!.lastName,
+    //     //   "emailAddress": _userAuth!.email,
+    //     //   "mobileNumber": _userAuth!.phoneNumber,
+    //     //   "password": _userAuth!.password,
+    //     //   "platform": Platform.isAndroid ? "android" : "ios",
+    //     //   "createdAt": DateTime.now()
+    //     // }
+    //     User? user = _auth.userData;
+    //     if (!user.emailVerified) {
+    //       await user.sendEmailVerification();
+    //     }
+    //   }
+    // }
 
     _handleSubmitAction() async {
       if (_keyForm.currentState?.validate() ?? false) {
         _keyForm.currentState?.save();
 
+        // Todo
         FocusScope.of(context).requestFocus(FocusNode());
 
-        User? _user = await _auth.register(data: _userAuth!);
-        if (_user != null) {
-          FirebaseFirestore.instance
-              .collection("users")
-              .doc(_userAuth!.id)
-              .set(_userAuth!.toMap()!);
-          _navHome(context);
-        } else {
-          errorToast(_auth.errorMessage);
-        }
+        await _auth.register(data: _userAuth!);
+        //await _auth.verify();
+
+        // FirebaseFirestore.instance
+        //     .collection("users")
+        //     .add(_userAuth!.toMap()!);
+        User? user = FirebaseAuth.instance.currentUser;
+        // _userAuth!.id = user!.uid;
+        _userAuth!.setRole('user');
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user!.uid)
+            .set(_userAuth!.toMap());
+        // //            User? user = _auth.userData;
+        // if (user != null && !user.emailVerified) {
+        //   await user.sendEmailVerification();
+        // }
+        _navHome(context);
       }
     }
 
@@ -74,6 +109,8 @@ class CvForm extends StatelessWidget {
                 // * Birthdate
                 const SBH(h: 20),
                 FieldBirthday(valueBd: _userAuth!.setbirthDate),
+                const SBH(h: 20),
+                FieldSpecialty(valueSpecialty: _userAuth!.setSpecialty),
                 // * Experience
                 const SBH(h: 20),
                 FieldExperience(valueExp: _userAuth!.setExperience),
@@ -92,16 +129,36 @@ class CvForm extends StatelessWidget {
                 // ),
                 // * Phone Number
                 const SBH(h: 20),
-                FieldPhoneNumber(valuePhone: _userAuth!.setPhoneNumber),
+                FieldMobileNumber(valuePhone: _userAuth!.setMobileNumber),
                 // * Country
                 const SBH(h: 20),
                 FieldCountry(valueCountry: _userAuth!.setCountry),
                 // * City
                 const SBH(h: 20),
                 FieldCity(valueCity: _userAuth!.setCity),
+
                 const SBH(h: 20),
                 // * Button
+                Center(
+                    child: SimpleBtn(
+                  btnTitle: KeyLang.uploadCv,
+                  onTap: () async {
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
+
+                    if (result != null) {
+                      Uint8List? fileBytes = result.files.first.bytes;
+                      String fileName = result.files.first.name;
+
+                      // Upload file
+                      await FirebaseStorage.instance
+                          .ref('uploads/$fileName')
+                          .putData(fileBytes!);
+                    }
+                  },
+                )),
                 const SBH(h: 20),
+
                 Center(
                   child: _auth.isLoading
                       ? const AppLoading(chooseLoading: ChooseLoading.button)
@@ -121,10 +178,8 @@ class CvForm extends StatelessWidget {
 
   // * Navigator Home Page
   void _navHome(BuildContext context) =>
-      Navigator.pushNamed(context, UserLandScape.id);
+      Navigator.pushReplacementNamed(context, UserLandScape.id);
 }
-
-
 
 // class CvForm extends StatelessWidget {
 //   static const String id = 'CvForm';
@@ -133,11 +188,10 @@ class CvForm extends StatelessWidget {
 //   // *  model save data
 //   const CvForm({Key? key}) : super(key: key);
 
-
 //   @override
 //   Widget build(BuildContext context) {
 //     final UserAuthService _auth = Provider.of<UserAuthService>(context);
-    
+
 //   _handleSubmitAction() async {
 //     if (_keyForm.currentState?.validate() ?? false) {
 //                               _keyForm.currentState?.save();
@@ -153,7 +207,6 @@ class CvForm extends StatelessWidget {
 //                               }
 //                              FirebaseFirestore.instance.collection("users").doc( PageRegisterState.userAuth.id).setData( PageRegisterState.userAuth.toMap());
 //                             }
-
 
 //   }
 //     return Scaffold(
@@ -205,26 +258,26 @@ class CvForm extends StatelessWidget {
 //                 const SBH(h: 20),
 //                 // * Button
 
-                // Center(
-                //   child: _auth.isLoading
-                //       ? const AppLoading(chooseLoading: ChooseLoading.button)
-                //       : SimpleBtn(
-                //           btnTitle: KeyLang.uploadCv,
-                //           onTap: () async {
-                //             if (_keyForm.currentState?.validate() ?? false) {
-                //               _keyForm.currentState?.save();
-                //               FocusScope.of(context).requestFocus(FocusNode());
-                //               User? _user =
-                //                   await _auth.register(data: _userAuth);
-                //               if (_user != null) {
-                //                 _navHome(context);
-                //               } else {
-                //                 errorToast(_auth.errorMessage);
-                //               }
-                //             }
-                //           },
-                //         ),
-                // ),
+// Center(
+//   child: _auth.isLoading
+//       ? const AppLoading(chooseLoading: ChooseLoading.button)
+//       : SimpleBtn(
+//           btnTitle: KeyLang.uploadCv,
+//           onTap: () async {
+//             if (_keyForm.currentState?.validate() ?? false) {
+//               _keyForm.currentState?.save();
+//               FocusScope.of(context).requestFocus(FocusNode());
+//               User? _user =
+//                   await _auth.register(data: _userAuth);
+//               if (_user != null) {
+//                 _navHome(context);
+//               } else {
+//                 errorToast(_auth.errorMessage);
+//               }
+//             }
+//           },
+//         ),
+// ),
 //                 const SBH(h: 20),
 //                 Center(
 //                   child: _auth.isLoading
@@ -256,33 +309,31 @@ class CvForm extends StatelessWidget {
 //         ),
 //       ),
 //     );
-    
+
 //   }
-  
 
 //   // * Navigator Home Page
 //   void _navHome(BuildContext context) =>
 //       Navigator.pushNamed(context, UserLandScape.id);
 // }
 
-
-                // Center(
-                //   child: _auth.isLoading
-                //       ? const AppLoading(chooseLoading: ChooseLoading.button)
-                //       : SimpleBtn(
-                //           btnTitle: KeyLang.uploadCv,
-                //           onTap: () async {
-                //             if (_keyForm.currentState?.validate() ?? false) {
-                //               _keyForm.currentState?.save();
-                //               FocusScope.of(context).requestFocus(FocusNode());
-                //               User? _user =
-                //                   await _auth.register(data: _userAuth);
-                //               if (_user != null) {
-                //                 _navHome(context);
-                //               } else {
-                //                 errorToast(_auth.errorMessage);
-                //               }
-                //             }
-                //           },
-                //         ),
-                // ),
+// Center(
+//   child: _auth.isLoading
+//       ? const AppLoading(chooseLoading: ChooseLoading.button)
+//       : SimpleBtn(
+//           btnTitle: KeyLang.uploadCv,
+//           onTap: () async {
+//             if (_keyForm.currentState?.validate() ?? false) {
+//               _keyForm.currentState?.save();
+//               FocusScope.of(context).requestFocus(FocusNode());
+//               User? _user =
+//                   await _auth.register(data: _userAuth);
+//               if (_user != null) {
+//                 _navHome(context);
+//               } else {
+//                 errorToast(_auth.errorMessage);
+//               }
+//             }
+//           },
+//         ),
+// ),

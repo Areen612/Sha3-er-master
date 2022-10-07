@@ -2,6 +2,7 @@ import 'package:shagher/util/api_key.dart';
 
 class ModelCompanyAuth {
   String? id;
+  String? role = 'company';
   String? companyName;
   String? password;
   String? email;
@@ -17,6 +18,7 @@ class ModelCompanyAuth {
 
   ModelCompanyAuth({
     this.id,
+    this.role = 'company',
     this.companyName,
     this.password,
     this.email,
@@ -31,6 +33,7 @@ class ModelCompanyAuth {
     this.commercialName,
   });
 
+  setRole(String? role) => this.role = role ?? 'company';
   setCompanyName(String? companyName) => this.companyName = companyName ?? '';
   setPassword(String? password) => this.password = password ?? '';
   setEmail(String? email) => this.email = email ?? '';
@@ -52,6 +55,7 @@ class ModelCompanyAuth {
   Map<String, dynamic> toMap() {
     return {
       KeyApi.id: id,
+      KeyApi.role: role,
       KeyApi.companyName: companyName,
       KeyApi.password: password,
       KeyApi.email: email,
@@ -69,6 +73,7 @@ class ModelCompanyAuth {
 
   ModelCompanyAuth.fromMap(Map<String, dynamic> data) {
     id = data[KeyApi.id];
+    role = data[KeyApi.role];
     companyName = data[KeyApi.companyName];
     password = data[KeyApi.password];
     email = data[KeyApi.email];

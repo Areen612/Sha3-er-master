@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shagher/service/lang/app_lang.dart';
 import 'package:shagher/service/theme/app_theme.dart';
 
@@ -16,7 +17,7 @@ class ForgotPassText extends StatelessWidget {
       child: TextButton(
         onPressed: () => _navForgot(context),
         child: Text(
-          KeyLang.forgotPass, //.tr(),
+          KeyLang.forgotPass.tr(),
           style: AppTheme.b1(context)
               .copyWith(decoration: TextDecoration.underline),
         ),

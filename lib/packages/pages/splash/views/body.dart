@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:shagher/language/generated/key_lang.dart';
+import 'package:shagher/packages/pages/auth/view/login.dart';
+import 'package:shagher/packages/pages/company/views/landscape.dart';
+import 'package:shagher/packages/pages/home/views/body.dart';
 import 'package:shagher/packages/pages/tour/views/body.dart';
 import 'package:shagher/service/theme/app_theme.dart';
 import 'package:shagher/themes/app_colors.dart';
@@ -28,6 +32,11 @@ class _PageSplashState extends State<SplashWidget> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       //var route = MaterialPageRoute(builder: (context) => const PageHome());
+      if (FirebaseAuth.instance.currentUser != null) {
+        _navHome(context);
+      } else {
+        _navLogin(context);
+      }
       Navigator.pushReplacementNamed(context, TourWidget.id);
     });
   }
@@ -71,3 +80,14 @@ class _PageSplashState extends State<SplashWidget> {
     );
   }
 }
+
+void _navLogin(BuildContext context) =>
+    Navigator.pushNamed(context, LoginWidget.id);
+
+// * Navigator Home Page
+void _navHome(BuildContext context) =>
+    Navigator.pushReplacementNamed(context, UserLandScape.id);
+
+// * Navigator Home Page
+void _navCompany(BuildContext context) =>
+    Navigator.pushReplacementNamed(context, CompanyLandScape.id);

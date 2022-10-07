@@ -6,7 +6,7 @@ import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/packages/pages/auth/view/wrapper.dart';
 import 'package:shagher/packages/pages/tour/componets/tour_card.dart';
 import 'package:shagher/themes/app_colors.dart';
-import 'package:shagher/util/path_images.dart';
+import 'package:shagher/util/path_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../components/button/elevated_btn.dart';
@@ -25,6 +25,7 @@ class _TourWidgetState extends State<TourWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.bgBlue,
       body: Container(
         color: AppColors.primarybg,
@@ -37,19 +38,19 @@ class _TourWidgetState extends State<TourWidget> {
                 //todo texts and tr()
                 children: <Widget>[
                   TourCard(
-                    image: PathImages.tourTwo,
+                    image: PathSvg.tourOne,
                     title: KeyLang.tourHeaderOne.tr(),
                     // subtitle:
                     //     'Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua. '
                   ),
                   TourCard(
-                    image: PathImages.tourFive,
+                    image: PathSvg.tourTwo,
                     title: KeyLang.tourHeaderTwo.tr(),
                     // subtitle:
                     //     'Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua. '
                   ),
                   TourCard(
-                    image: PathImages.tourFour,
+                    image: PathSvg.tourThree,
                     title: KeyLang.tourHeaderThree.tr(),
                     // subtitle:
                     //     'Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor\nincididunt ut labore et dolore magna aliqua. '

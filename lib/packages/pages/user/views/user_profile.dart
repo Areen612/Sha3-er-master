@@ -4,20 +4,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:shagher/language/generated/key_lang.dart';
-import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/components/image/cache_user.dart';
 import 'package:shagher/packages/pages/auth/model/user_auth.dart';
 import 'package:shagher/packages/pages/home/components/app_bar_home.dart';
 import 'package:shagher/packages/pages/user/views/edit_profile_page.dart';
 import 'package:shagher/themes/app_colors.dart';
-import 'package:shagher/widget/cv_details_widget.dart';
+import 'package:shagher/widget/details_widget.dart';
 import 'package:shagher/widget/name_widget_user.dart';
 import 'package:shagher/widget/numbers_widget.dart';
 
+import '../../../components/button/simple_btn.dart';
+
 class UserProfile extends StatefulWidget {
   static const id = 'UserProfile';
+  final String? userID;
   const UserProfile({
     Key? key,
+    this.userID,
   }) : super(key: key);
 
   @override
@@ -51,7 +54,7 @@ class _UserProfileState extends State<UserProfile> {
       loggedInUser = ModelUserAuth.fromMap(value.data()!);
       loggedInUser.setId(docId);
       print('dataaa $loggedInUser');
-      print('geee ' + loggedInUser.firstName!);
+      //print('geee ' + loggedInUser.firstName);
       print('geee ${loggedInUser.experience}');
       print('geee ${loggedInUser.skills}');
       //print('geee ${loggedInUser.specialty}');
@@ -100,8 +103,8 @@ class _UserProfileState extends State<UserProfile> {
               const SizedBox(height: 24),
 
               NameWidgetUser(
-                name: loggedInUser.firstName!,
-                specialty: loggedInUser.specialty!,
+                name: loggedInUser.firstName,
+                specialty: loggedInUser.specialty,
               ),
               const SizedBox(height: 24),
               const Divider(),
@@ -129,9 +132,9 @@ class _UserProfileState extends State<UserProfile> {
               const SizedBox(height: 88),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 48),
-                child: ElevatedBtn(
+                child: SimpleBtn(
                   // TODO: tr()
-                  title: 'CV',
+                  btnTitle: 'CV',
                   onTap: () async {
                     final cvId = await FlutterDownloader.enqueue(
                       url: 'your download link',
@@ -144,7 +147,7 @@ class _UserProfileState extends State<UserProfile> {
                           true, // click on notification to open downloaded file (for Android)
                     );
                   },
-                  width: 300,
+                  // width: 300,
                 ),
               ),
               const SizedBox(height: 88),

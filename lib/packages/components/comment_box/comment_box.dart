@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:shagher/packages/components/comment_box/comment_child.dart';
 import 'package:shagher/themes/app_colors.dart';
 
-class Reviews extends StatefulWidget {
-  const Reviews({Key? key}) : super(key: key);
+class CommentsBox extends StatefulWidget {
+  const CommentsBox({Key? key}) : super(key: key);
 
   @override
-  State<Reviews> createState() => _ReviewsState();
+  State<CommentsBox> createState() => _ReviewsState();
 }
 
-class _ReviewsState extends State<Reviews> {
+class _ReviewsState extends State<CommentsBox> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   //ModelUser user = ModelUser();

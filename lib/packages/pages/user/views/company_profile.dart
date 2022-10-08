@@ -1,18 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shagher/packages/components/image/cache_user.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
-import 'package:shagher/packages/components/text_field_form/custom_filed.dart';
 import 'package:shagher/packages/pages/auth/model/company_auth.dart';
 import 'package:shagher/packages/pages/home/components/app_bar_home.dart';
+import 'package:shagher/packages/pages/user/components/reviews_section.dart';
 import 'package:shagher/themes/app_colors.dart';
-import 'package:shagher/widget/cv_details_widget.dart';
+import 'package:shagher/widget/details_widget.dart';
 import 'package:shagher/widget/name_widget_company.dart';
 
 class CompanyProfileUser extends StatefulWidget {
   static const id = 'CompanyProfileUser';
+
+  final String? compnayID;
   const CompanyProfileUser(
-      {Key? key, ModelCompanyAuth? compnay, bool isComp = false})
+      {Key? key,
+      ModelCompanyAuth? compnay,
+      bool isComp = false,
+      this.compnayID})
       : _company = compnay,
         _isComp = isComp,
         super(key: key);
@@ -25,7 +31,13 @@ class CompanyProfileUser extends StatefulWidget {
 
 class _CompanyProfileUserState extends State<CompanyProfileUser> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController commentController = TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool showComment = false;
+  final bool _isCommenting = false;
+  String? name;
+  String? imageUrl;
+
   @override
   List items = [
     {
@@ -43,6 +55,7 @@ class _CompanyProfileUserState extends State<CompanyProfileUser> {
     companyName: 'Company Name',
     specialty: 'Cyper Security',
   );
+
   @override
   void initState() {
     @override
@@ -102,11 +115,11 @@ class _CompanyProfileUserState extends State<CompanyProfileUser> {
                   height: 128,
                   width: 128,
                 ),
-                const SizedBox(height: 24),
+                const SBH(h: 24),
                 NameWidgetCompany(company: compnay),
-                const SizedBox(height: 24),
+                const SBH(h: 24),
                 const Divider(),
-                const SizedBox(height: 14),
+                const SBH(h: 14),
                 const DetailsWidget(
                   title: 'About',
                   description:
@@ -147,58 +160,11 @@ class _CompanyProfileUserState extends State<CompanyProfileUser> {
                   'Reviews',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SBH(h: 24),
-                const CustomField(
-                  hint: 'Add a review',
-                ),
-                ListView.builder(
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: items[index].leading,
-                        title: items[index].title,
-                        subtitle: items[index].subtitle,
-                      );
-                    }),
-                // CommentBox(
-                //   userImage:
-                //       'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-                //   child: CommentChild(
-                //     data: filedata,
-                //   ),
-                //   labelText: 'Write a review...',
-                //   withBorder: false,
-                //   errorText: 'Comment cannot be blank',
-                //   sendButtonMethod: () {
-                //     if (formKey.currentState!.validate()) {
-                //       print(commentController.text);
-                //       setState(() {
-                //         var value = {
-                //           'name': 'user', // user!.displayName,
-                //           'pic':
-                //               'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-                //           'message': commentController.text
-                //         };
-                //         filedata.insert(0, value);
-                //       });
-                //       commentController.clear();
-                //       FocusScope.of(context).unfocus();
-                //     } else {
-                //       print("Not validated");
-                //     }
-                //   },
-                //   formKey: formKey,
-                //   commentController: commentController,
-                //   backgroundColor: AppColors.bgWhite,
-                //   textColor: AppColors.black,
-                //   sendWidget: Icon(Icons.send_sharp,
-                //       size: 30, color: AppColors.primary),
-                // ),
-                //const Reviews(),
-                // BottomSheet(builder: (BuildContext context) {
-
-                //  }, onClosing: () {  },),
-                // const SizedBox(height: 88),
+                const SBH(h: 5),
+                //* ******************************************************************  *//
+                Reviews(
+                  compnayID: widget.compnayID,
+                )
               ],
             ),
           ),

@@ -1,27 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/packages/components/space/size_box_width.dart';
-import 'package:shagher/packages/pages/Posts/models/post.dart';
 import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/requests.dart';
-import 'package:shagher/packages/pages/user/views/company_profile.dart';
 import 'package:shagher/service/theme/app_theme.dart';
 import 'package:shagher/themes/app_colors.dart';
+import 'package:shagher/util/api_key.dart';
 import 'package:shagher/util/path_images.dart';
 import 'package:shagher/widget/post_details_widget.dart';
 
+import '../../../../language/generated/key_lang.dart';
+
 // TODO refactor
-class PostCardDetails extends StatelessWidget {
-  const PostCardDetails({Key? key, bool isComp = false, ModelPost? post})
+class PostCardDetails extends StatefulWidget {
+  final bool _isComp;
+  final dynamic document;
+  const PostCardDetails({Key? key, bool isComp = false, this.document})
       : _isComp = isComp,
-        _post = post,
         super(key: key);
 
-  final ModelPost? _post;
-  final bool _isComp;
+  @override
+  State<PostCardDetails> createState() => _PostCardDetailsState();
+}
 
+class _PostCardDetailsState extends State<PostCardDetails> {
   @override
   Widget build(BuildContext context) {
     _handleMovetoEdit(post) {
@@ -31,13 +36,14 @@ class PostCardDetails extends StatelessWidget {
               builder: ((context) => AddPostWidget(docment: post))));
     }
 
-    _handleSoftDelete(post) async {
+    _handleSoftDelete() async {
       await FirebaseFirestore.instance
           .collection("posts")
-          .doc(post.id)
+          .doc(widget.document.id)
           .update({"status": 1});
 
       //print("Object has been updated!");
+      Navigator.pop(context);
     }
 
     // ToDo post service
@@ -46,13 +52,13 @@ class PostCardDetails extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         //mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          _isComp
+          widget._isComp
               ? Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      onTap: _handleMovetoEdit(_post),
+                      onTap: _handleMovetoEdit(widget.document),
                       child: const Icon(
                         Icons.edit,
                         color: AppColors.grey,
@@ -63,7 +69,7 @@ class PostCardDetails extends StatelessWidget {
           const SBH(h: 20),
           Expanded(
             // flex: 1,
-            child: !_isComp
+            child: !widget._isComp
                 ? ListTile(
                     leading: const Hero(
                         tag: 'tag_card',
@@ -85,44 +91,38 @@ class PostCardDetails extends StatelessWidget {
                             .copyWith(fontWeight: FontWeight.w200)),
                   ),
           ),
-          //const SBH(h: 10),
-          const PostDetailsWidget(text: 'Description:'),
+          PostDetailsWidget(text: KeyApi.description.tr()),
           const SBH(h: 10),
-          const PostDetailsWidget(
-            text:
-                'description increments by 1 for each child in the container and by 1 for each child in the container and by 1 for each child in the container and by 1 for each child in the container and by 1 for each child',
-            //all: true,
+          PostDetailsWidget(
+            text: widget.document[KeyApi.description],
             textTheme: 'b1',
           ),
           const SBH(h: 50),
-          const PostDetailsWidget(text: 'Range Salary:', textTheme: 'h6'),
+          PostDetailsWidget(
+              text: widget.document[KeyApi.rangeSalary], textTheme: 'h6'),
           const SBH(h: 10),
-          const PostDetailsWidget(
-            text: '400-600',
-            //all: true,
-            textTheme: 'b1',
-          ),
+          PostDetailsWidget(
+              text: widget.document[KeyApi.rangeSalary], textTheme: 'b1'),
           const SBH(h: 200),
           Expanded(
             flex: 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                !_isComp
+                !widget._isComp
                     ? ElevatedBtn(
-                        title: 'Company Profile',
-                        onTap: () =>
-                            Navigator.pushNamed(context, CompanyProfileUser.id),
+                        title: KeyLang.delete.tr(),
+                        onTap: () => _handleSoftDelete,
                         width: 150,
                       )
                     : ElevatedBtn(
-                        title: 'Requests',
+                        title: KeyLang.delete.tr(),
                         onTap: () =>
                             Navigator.pushNamed(context, RequestsWidget.id),
                         width: 150,
                       ),
                 const SBW(w: 20),
-                !_isComp
+                !widget._isComp
                     ? ElevatedBtn(
                         title: 'Apply',
                         onTap: () {},

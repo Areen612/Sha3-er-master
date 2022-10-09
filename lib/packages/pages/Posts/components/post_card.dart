@@ -65,7 +65,7 @@ void _gotoDetailsPage(BuildContext context, bool isComp, ModelPost data) {
             Expanded(
               flex: 2,
               child: PostCardDetails(
-                post: data,
+                document: data,
                 isComp: isComp,
               ),
             ),

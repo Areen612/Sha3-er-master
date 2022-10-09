@@ -1,18 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shagher/packages/pages/Posts/components/post_card.dart';
-import 'package:shagher/packages/pages/Posts/models/post.dart';
+import 'package:shagher/packages/pages/user/views/user_profile.dart';
+
+import '../../../../util/api_key.dart';
 
 class RequestsWidget extends StatefulWidget {
   static const String id = 'requests';
   const RequestsWidget({Key? key}) : super(key: key);
 
   @override
-  State<RequestsWidget> createState() => PaidWidgetState();
+  State<RequestsWidget> createState() => RequestsWidgetState();
 }
 
-class PaidWidgetState extends State<RequestsWidget> {
-  static List<ModelPost> users = [];
-
+class RequestsWidgetState extends State<RequestsWidget> {
   @override
   void initState() {
     super.initState();
@@ -20,10 +20,46 @@ class PaidWidgetState extends State<RequestsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (context, index) {
-        return const ListTile();
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection("users")
+          //.where("userId", isEqualTo: prefs!.getString("userId"))
+          .snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text("There are an error occured"),
+          );
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.connectionState == ConnectionState.active ||
+            snapshot.connectionState == ConnectionState.done) {
+          final data = snapshot.requireData;
+          return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    title: Text("${data.docs[index][KeyApi.firstName]}"),
+                    leading: Image.network(data.docs[index][KeyApi.imageUrl]),
+                    trailing: GestureDetector(
+                      child: const Icon(
+                        Icons.arrow_forward_ios,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const UserProfile(// TODO send user id
+                                        )));
+                      },
+                    ));
+              });
+        }
+        return Container();
       },
     );
   }

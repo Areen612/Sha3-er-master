@@ -6,6 +6,7 @@ import 'package:shagher/packages/components/space/size_box_height.dart';
 import 'package:shagher/packages/components/space/size_box_width.dart';
 import 'package:shagher/packages/pages/company/views/add_post_widget.dart';
 import 'package:shagher/packages/pages/company/views/requests.dart';
+import 'package:shagher/packages/pages/user/views/company_profile.dart';
 import 'package:shagher/service/theme/app_theme.dart';
 import 'package:shagher/themes/app_colors.dart';
 import 'package:shagher/util/api_key.dart';
@@ -111,12 +112,13 @@ class _PostCardDetailsState extends State<PostCardDetails> {
               children: <Widget>[
                 !widget._isComp
                     ? ElevatedBtn(
-                        title: KeyLang.delete.tr(),
-                        onTap: () => _handleSoftDelete,
+                        title: 'Company Profile',
+                        onTap: () => Navigator.popAndPushNamed(
+                            context, CompanyProfileUser.id),
                         width: 150,
                       )
                     : ElevatedBtn(
-                        title: KeyLang.delete.tr(),
+                        title: 'Requests',
                         onTap: () =>
                             Navigator.pushNamed(context, RequestsWidget.id),
                         width: 150,
@@ -125,14 +127,14 @@ class _PostCardDetailsState extends State<PostCardDetails> {
                 !widget._isComp
                     ? ElevatedBtn(
                         title: 'Apply',
-                        onTap: () {},
+                        onTap: () {
+                          // TODO implement this
+                        },
                         width: 150,
                       )
                     : ElevatedBtn(
-                        title: 'Delete',
-                        onTap: () {},
-                        // ! fix this
-                        //onTap: _handleSoftDelete,
+                        title: KeyLang.delete.tr(),
+                        onTap: () => _handleSoftDelete,
                         width: 150,
                       ),
               ],

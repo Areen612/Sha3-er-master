@@ -29,6 +29,7 @@ class LoginWidget extends StatelessWidget {
   // *  model save data
   static final ModelUserAuth _userAuth = ModelUserAuth();
   static final ModelCompanyAuth _companyAuth = ModelCompanyAuth();
+
   const LoginWidget({Key? key}) : super(key: key);
 
   @override
@@ -37,6 +38,7 @@ class LoginWidget extends StatelessWidget {
     final passwordcontroller = TextEditingController();
     // * Auth Provider
     final UserAuthService _auth = Provider.of<UserAuthService>(context);
+    // final RoleChange _roleProvider = Provider.of<RoleChange>(context);
     //final CompanyAuthService _comp = Provider.of<CompanyAuthService>(context);
 
     return Scaffold(

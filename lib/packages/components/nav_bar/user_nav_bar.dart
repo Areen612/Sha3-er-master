@@ -45,13 +45,12 @@ class UserNavBar extends StatelessWidget {
           ),
           label: KeyLang.training.tr(),
         ),
-        const BottomNavigationBarItem(
-          icon: Icon(
+        BottomNavigationBarItem(
+          icon: const Icon(
             Icons.settings,
             //color: widgetIndex == 0 ? AppColors.primary : AppColors.grey,
           ),
-          //TODO: tr()
-          label: 'Settings',
+          label: KeyLang.settings.tr(),
         ),
       ],
       currentIndex: selectedIndex,

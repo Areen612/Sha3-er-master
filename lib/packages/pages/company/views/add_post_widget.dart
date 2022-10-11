@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:shagher/controller/job_controller.dart';
 import 'package:shagher/language/generated/key_lang.dart';
 import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/components/space/size_box_height.dart';
@@ -53,6 +56,8 @@ class _AddPostWidgetState extends State<AddPostWidget> {
     _modelPost.id = user!.uid;
   }
 
+  PostControlleer postControlleer = Get.put(PostControlleer());
+
   // @override
   // void initState() {
   //   super.initState();
@@ -100,6 +105,25 @@ class _AddPostWidgetState extends State<AddPostWidget> {
 
                 );
       } else {
+        // _controllerTitle.text = widget.docment[KeyApi.title];
+        // _controllerRequirements.text = widget.docment[KeyApi.requirements];
+        // _controllerDescription.text = widget.docment[KeyApi.description];
+        // _value = widget.docment[KeyApi.type];
+        // _valueTraining = widget.docment[KeyApi.subType];
+        // // ! fix this
+        // _currentRangeValues = widget.docment[KeyApi.rangeSalary];
+        postControlleer.addPost(
+            id: user!.uid,
+            title: _controllerTitle.text,
+            requirements: _controllerRequirements.text,
+            description: _controllerDescription.text,
+            rangeSalary: '${startSalary.toString()} - ${endSalary.toString()} ',
+            rangeSalaryStart: startSalary,
+            rangeSalaryEnd: endSalary,
+            type: _value == 0 ? 'Job' : 'Training',
+            subType: _valueTraining == 0 ? 'Paid' : 'Unpaid',
+            creator: '',
+            status: 1);
         await FirebaseFirestore.instance
             .collection("posts")
             .add(_modelPost.toMap()
@@ -117,6 +141,9 @@ class _AddPostWidgetState extends State<AddPostWidget> {
       Navigator.pop(context);
     }
   }
+
+  double startSalary = 0.0;
+  double endSalary = 0.0;
 
   // TODO: build the delete icon
   // _handleSoftDelete() async {
@@ -300,7 +327,11 @@ class _AddPostWidgetState extends State<AddPostWidget> {
                     ),
                     onChanged: (RangeValues values) {
                       setState(() {
+                        print('value is  $values');
                         _currentRangeValues = values;
+                        startSalary = values.start;
+                        endSalary = values.end;
+
                         _modelPost.setRangeSalary(
                             values.start.round().toString() +
                                 ' - ' +

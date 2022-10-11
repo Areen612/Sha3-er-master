@@ -99,4 +99,5 @@ class KeyLang {
   static const String nationalInvestorNumber = 'nationalInvestorNumber';
   static const String commercialNumber = 'commercialNumber';
   static const String commercialName = 'commercialName';
+  static const String settings = 'settings';
 }

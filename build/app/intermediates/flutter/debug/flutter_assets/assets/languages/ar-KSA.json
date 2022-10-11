@@ -90,5 +90,6 @@
     "nationalInvestorNumber": "رقم المستثمر الوطني",
     "commercialNumber": "الرقم التجاري",
     "commercialName": "الاسم التجاري",
-    "country": "البلد"
+    "country": "البلد",
+    "settings": "الإعدادات"
 }

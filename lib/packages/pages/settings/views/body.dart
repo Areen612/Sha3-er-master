@@ -49,7 +49,9 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               subtitle: AppLang.isAr(context)
                   ? Text(KeyLang.arabic.tr())
                   : Text(KeyLang.english.tr()),
-              contentPadding: const EdgeInsets.only(left: 40),
+              contentPadding: AppLang.isAr(context)
+                  ? const EdgeInsets.only(right: 40)
+                  : const EdgeInsets.only(left: 40),
               onTap: () {
                 showDialog(
                   context: context,
@@ -63,22 +65,31 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               leading: AppTheme.isDark(context)
                   ? const Icon(Icons.dark_mode)
                   : const Icon(Icons.light_mode),
-              title: Text(_themeText),
-              trailing: Switch(
-                activeColor: AppColors.primary,
-                value: _themeProvider.isDark,
-                onChanged: (value) async {
-                  _themeProvider.updateTheme = value;
-                  await AppTheme.setTheme(value: value);
-                },
+              title: Text(_themeText.tr()),
+              trailing: Padding(
+                padding: AppLang.isAr(context)
+                    ? const EdgeInsets.only(left: 15)
+                    : const EdgeInsets.only(right: 15),
+                child: Switch(
+                  activeColor: AppColors.primary,
+                  value: _themeProvider.isDark,
+                  onChanged: (value) async {
+                    _themeProvider.updateTheme = value;
+                    await AppTheme.setTheme(value: value);
+                  },
+                ),
               ),
-              contentPadding: const EdgeInsets.only(left: 40, right: 10),
+              contentPadding: AppLang.isAr(context)
+                  ? const EdgeInsets.only(right: 40)
+                  : const EdgeInsets.only(left: 40),
               //trailing: const Icon(Icons.arrow_forward_ios),
             ),
             ListTile(
               leading: const Icon(Icons.logout),
               title: Text(KeyLang.logout.tr()),
-              contentPadding: const EdgeInsets.only(left: 40),
+              contentPadding: AppLang.isAr(context)
+                  ? const EdgeInsets.only(right: 40)
+                  : const EdgeInsets.only(left: 40),
               //onTap: _auth.signOut,
               onTap: () {
                 _auth.signOut();

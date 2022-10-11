@@ -1,22 +1,19 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shagher/language/generated/key_lang.dart';
+import 'package:shagher/packages/components/button/elevated_btn.dart';
 import 'package:shagher/packages/pages/auth/model/user_auth.dart';
 import 'package:shagher/packages/pages/home/components/app_bar_home.dart';
 import 'package:shagher/packages/pages/user/views/user_profile.dart';
 import 'package:shagher/widget/edit_image.dart';
 
-import '../../../components/button/simple_btn.dart';
-import '../../../components/space/size_box_height.dart';
 import '../../../components/text_field_form/custom_filed.dart';
 
 class UserEditProfile extends StatefulWidget {
@@ -35,7 +32,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
   final TextEditingController _controllerexperience = TextEditingController();
 
   final _keyForm = GlobalKey<FormState>();
-  //String? _imageUrl;
+  String? _imageUrl;
   String? _filaName;
   @override
   // void initState() {
@@ -88,7 +85,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
       //Navigator.pop(context);
     }
     // !! fix this
-    Navigator.pushReplacementNamed(context, UserProfile.id);
+    Navigator.pushNamed(context, UserProfile.id);
     print('weeee ${widget.document!.firstName}');
     print('booooooooooo');
   }
@@ -119,7 +116,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
         // 6- Put a file into ref. and create it on Firebase.
         await referance.putFile(file);
 
-        //_imageUrl = await referance.getDownloadURL();
+        _imageUrl = await referance.getDownloadURL();
         // 7- Close the Bottom Sheet.
         Navigator.pop(context);
       }
@@ -175,7 +172,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
               CustomField(
                 // labelText: KeyLang.specialty.tr(),
                 //helperText: widget.document!.skills!,
-                initValue: widget.document!.specialty,
+                initValue: widget.document!.specialty!,
                 //controller: _controllerskills,
                 onChanged: (specialty) {
                   widget.document!.specialty = specialty;
@@ -191,9 +188,8 @@ class _UserEditProfileState extends State<UserEditProfile> {
               CustomField(
                 // labelText: KeyLang.skills.tr(),
                 //helperText: widget.document!.skills!,
-                initValue: widget.document!.skills,
+                initValue: widget.document!.skills!,
                 //controller: _controllerskills,
-                maxLines: 10,
                 onChanged: (skills) {
                   widget.document!.setSkills(skills);
                 },
@@ -216,7 +212,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
               CustomField(
                   //  labelText: KeyLang.experience.tr(),
                   maxLines: 5,
-                  initValue: widget.document!.experience,
+                  initValue: widget.document!.experience!,
                   //controller: _controllerexperience,
                   onChanged: (experience) {
                     widget.document!.experience = experience;
@@ -230,29 +226,11 @@ class _UserEditProfileState extends State<UserEditProfile> {
               //       widget.document!.experience = experience;
               //     }),
               const SizedBox(height: 88),
-              SimpleBtn(
-                btnTitle: KeyLang.uploadCv.tr(),
-                onTap: () async {
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles();
-
-                  if (result != null) {
-                    Uint8List? fileBytes = result.files.first.bytes;
-                    String fileName = result.files.first.name;
-
-                    // Upload file
-                    await FirebaseStorage.instance
-                        .ref('uploads/$fileName')
-                        .putData(fileBytes!);
-                  }
-                },
-              ),
-              const SBH(h: 20),
-              SimpleBtn(
+              ElevatedBtn(
                 // TODO: tr()
-                btnTitle: KeyLang.submit.tr(),
+                title: KeyLang.submit.tr(),
                 onTap: _handleSubmitAction,
-                //width: 300,
+                width: 300,
               ),
               const SizedBox(height: 88),
             ],

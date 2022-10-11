@@ -13,8 +13,10 @@ class ModelPost {
   String? subType;
   String? creator;
   int? status;
+  String? docId;
 
   ModelPost({
+    this.docId,
     this.id,
     this.title,
     this.requirements,
@@ -113,16 +115,17 @@ class ModelPost {
   }
 
   ModelPost.fromQueryDocumentSnapshot(QueryDocumentSnapshot data) {
-    id = data[KeyApi.id];
-    title = data[KeyApi.title];
-    requirements = data[KeyApi.requirements];
-    description = data[KeyApi.description];
-    rangeSalary = data[KeyApi.rangeSalary];
-    rangeSalaryStart = data[KeyApi.rangeSalaryStart];
-    rangeSalaryEnd = data[KeyApi.rangeSalaryEnd];
-    type = data[KeyApi.type];
-    subType = data[KeyApi.subType];
-    creator = data[KeyApi.creator];
-    status = data[KeyApi.status];
+    docId = data.id;
+    id = data[KeyApi.id] ?? '';
+    title = data[KeyApi.title] ?? '';
+    requirements = data[KeyApi.requirements] ?? '';
+    description = data[KeyApi.description] ?? '';
+    rangeSalary = data[KeyApi.rangeSalary] ?? '';
+    rangeSalaryStart = data[KeyApi.rangeSalaryStart] ?? 0;
+    rangeSalaryEnd = data[KeyApi.rangeSalaryEnd] ?? 0;
+    type = data[KeyApi.type] ?? '';
+    subType = data[KeyApi.subType] ?? '';
+    creator = data[KeyApi.creator] ?? '';
+    status = data[KeyApi.status] ?? 1;
   }
 }

@@ -1,6 +1,7 @@
-import '../../../components/loading/loading_page.dart';
+import 'package:shagher/packages/components/loading/loading_page.dart';
+import 'package:shagher/packages/pages/home/views/body.dart';
+
 import 'login.dart';
-import '../../home/views/body.dart';
 import 'package:flutter/material.dart';
 
 class Wrapper extends StatelessWidget {
@@ -10,16 +11,15 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      //     stream: AuthService().userStream,
+      //  stream: UserAuthService().userStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingPage();
         }
         if (snapshot.hasData) {
           return const UserLandScape();
-        } else {
-          return const LoginWidget();
         }
+        return const LoginWidget();
       },
     );
   }

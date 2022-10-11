@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shagher/util/api_key.dart';
 
 class ModelUserAuth {
+  String? userId;
   String? id;
   String? role;
   String? firstName;
@@ -106,5 +108,21 @@ class ModelUserAuth {
     experience = data[KeyApi.experience];
     imageUrl = data[KeyApi.imageUrl];
     cvUrl = data[KeyApi.cvUrl];
+  }
+
+  ModelUserAuth.fromQueryDocumentSnapshot(QueryDocumentSnapshot data) {
+    // id = data[KeyApi.id];
+    role = data[KeyApi.role];
+    firstName = data[KeyApi.firstName];
+    lastName = data[KeyApi.lastName];
+    email = data[KeyApi.email];
+    specialty = data[KeyApi.specialty];
+    mobileNumber = data[KeyApi.mobileNumber];
+    country = data[KeyApi.country];
+    city = data[KeyApi.city];
+    skills = data[KeyApi.skills];
+    experience = data[KeyApi.experience];
+    // imageUrl = data[KeyApi.imageUrl];
+    //cvUrl = data[KeyApi.cvUrl];
   }
 }

@@ -5,11 +5,13 @@ import 'package:shagher/packages/pages/Posts/models/post.dart';
 import 'package:shagher/util/path_images.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key, required this.data, bool isComp = false})
+  const PostCard(
+      {Key? key, required this.data, bool isComp = false, required this.index})
       : _isComp = isComp,
         super(key: key);
   final ModelPost data;
   final bool _isComp;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class PostCard extends StatelessWidget {
               const SBH(h: 10),
               !_isComp
                   ? ListTile(
-                      leading: const Hero(
-                          tag: 'tag_card',
-                          child: Image(
+                      leading: Hero(
+                          tag: index, //'tag_card',
+                          child: const Image(
                               image: AssetImage(PathImages.profileImage))),
 
                       title: Text(data.title!),
@@ -40,7 +42,8 @@ class PostCard extends StatelessWidget {
                 children: <Widget>[
                   TextButton(
                     child: const Text('view post'),
-                    onPressed: () => _gotoDetailsPage(context, _isComp, data),
+                    onPressed: () =>
+                        _gotoDetailsPage(context, _isComp, data, index),
                   ),
                   const SizedBox(width: 8),
                 ],
@@ -53,7 +56,8 @@ class PostCard extends StatelessWidget {
   }
 }
 
-void _gotoDetailsPage(BuildContext context, bool isComp, ModelPost data) {
+void _gotoDetailsPage(
+    BuildContext context, bool isComp, ModelPost data, int index) {
   Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => Scaffold(
       appBar: AppBar(),
@@ -65,6 +69,7 @@ void _gotoDetailsPage(BuildContext context, bool isComp, ModelPost data) {
             Expanded(
               flex: 2,
               child: PostCardDetails(
+                index: index,
                 document: data,
                 isComp: isComp,
               ),

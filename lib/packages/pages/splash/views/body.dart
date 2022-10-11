@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -31,12 +30,6 @@ class _PageSplashState extends State<SplashWidget> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      //var route = MaterialPageRoute(builder: (context) => const PageHome());
-      if (FirebaseAuth.instance.currentUser != null) {
-        _navHome(context);
-      } else {
-        _navLogin(context);
-      }
       Navigator.pushReplacementNamed(context, TourWidget.id);
     });
   }

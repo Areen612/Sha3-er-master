@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shagher/controller/job_controller.dart';
 import 'package:shagher/packages/pages/Posts/components/post_card.dart';
 import 'package:shagher/packages/pages/Posts/models/post.dart';
 
@@ -32,12 +34,19 @@ class PaidWidgetState extends State<PaidWidget> {
   @override
   Widget build(BuildContext context) {
     // final postProvider = Provider.of<PostProvider>(context);
-    return ListView.builder(
-      itemCount: cards.length,
-      itemBuilder: (context, index) {
-        return PostCard(data: cards[index]);
-      },
-    );
+    return GetX<PostControlleer>(
+        init: Get.put(PostControlleer()),
+        builder: (_con) {
+          return ListView.builder(
+            itemCount: _con.getPaidTraining.length,
+            itemBuilder: (context, index) {
+              return PostCard(
+                data: _con.getPaidTraining[index],
+                index: index,
+              );
+            },
+          );
+        });
     // final postsList = Provider.of<List<ModelPost>>(context);
     // return ListView.builder(
     //   itemCount: postsList.length,

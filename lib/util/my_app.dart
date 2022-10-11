@@ -29,9 +29,25 @@ class AppScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+// late StreamSubscription<User?> user;
+// void initState() {
+//   user = FirebaseAuth.instance.authStateChanges().listen((user) {
+//     if (user == null) {
+//       print('User is currently signed out!');
+//     } else {
+//       print('User is signed in!');
+//     }
+//   });
+// }
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final firestoreService = FireStoreService();

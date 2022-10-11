@@ -167,6 +167,21 @@ class PageRegisterState extends State<RegisterWidget> {
     );
   }
 
+  // void initState() async {
+//   User? user = FirebaseAuth.instance.currentUser;
+//   final Map<String, dynamic>? userData;
+//   DocumentSnapshot document =
+//       await FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
+//   userData = document.data() as Map<String, dynamic>;
+// }
+  // if (snapshot.hasData && FirebaseAuth.instance.currentUser != null) {
+  //       if (userData!['role'] == 'user') {
+  //         return const UserLandScape();
+  //       } else if (userData['role'] == 'company') {
+  //         return const CompanyLandScape();
+  //       }
+  //     }
+
   // * Navigator Home Page
   void _navHome(BuildContext context) =>
       Navigator.pushNamed(context, UserLandScape.id);

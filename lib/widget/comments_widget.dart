@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../packages/pages/user/views/user_profile.dart';
-
 class CommentWidget extends StatefulWidget {
   final String commentId;
   final String commenterId;
@@ -38,10 +36,10 @@ class _CommentWidgetState extends State<CommentWidget> {
     _colors.shuffle();
     return InkWell(
       onTap: () {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => UserProfile(userID: widget.commenterId)));
+        // Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => UserProfile(userID: widget.commenterId)));
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

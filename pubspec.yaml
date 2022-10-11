@@ -84,7 +84,7 @@ dependencies:
   comment_box: ^0.0.17
   cloud_firestore_odm: ^1.0.0-dev.30
   json_annotation: ^4.7.0
-
+  get: ^4.6.5
  
   
 

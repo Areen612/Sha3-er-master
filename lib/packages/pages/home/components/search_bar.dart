@@ -44,7 +44,7 @@ class CustomSearchDelegate extends SearchDelegate {
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        return PostCard(data: matchQuery[index]);
+        return PostCard(data: matchQuery[index], index: index);
       },
     );
   }
@@ -66,7 +66,7 @@ class CustomSearchDelegate extends SearchDelegate {
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        return PostCard(data: matchQuery[index]);
+        return PostCard(data: matchQuery[index], index: index);
       },
     );
   }

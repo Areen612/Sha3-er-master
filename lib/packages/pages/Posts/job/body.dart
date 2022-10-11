@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:shagher/controller/job_controller.dart';
 import 'package:shagher/packages/pages/Posts/components/post_card.dart';
-import 'package:shagher/packages/pages/Posts/models/post.dart';
 
 class JobsWidget extends StatefulWidget {
   static const String id = "JobsWidget";
@@ -21,16 +21,23 @@ class _JobsPageState extends State<JobsWidget> {
   @override
   Widget build(BuildContext context) {
     //final postProvider = Provider.of<PostProvider>(context);
-    final postsList = Provider.of<List<ModelPost>>(context);
+    //  final postsList = Provider.of<List<ModelPost>>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        body: ListView.builder(
-          itemCount: postsList.length,
-          itemBuilder: (context, index) {
-            return PostCard(data: postsList[index]);
-          },
-        ),
+        body: GetX<PostControlleer>(
+            init: Get.put(PostControlleer()),
+            builder: (_con) {
+              return ListView.builder(
+                itemCount: _con.getjobList.length,
+                itemBuilder: (context, index) {
+                  return PostCard(
+                    data: _con.getjobList[index],
+                    index: index,
+                  );
+                },
+              );
+            }),
         //drawer: const DrawerBody(),
       ),
     );
